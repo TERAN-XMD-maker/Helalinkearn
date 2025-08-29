@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HELALINK • Official Launch 13 Sep 2025 (2PM EAT)</title>
   <meta name="description" content="HELALINK – Online business platform. Launching 13 Sep 2025. Join now, get updates, and start earning through multiple methods." />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="HELALINK • Official Launch 13 Sep 2025 (2PM EAT)" />
+  <meta property="og:description" content="A next-gen online business platform with multiple ways of earning. Join the launch waitlist today!" />
+  <meta property="og:image" content="https://yourdomain.com/helalink-og.jpg" />
+  <meta property="og:type" content="website" />
   <link rel="icon" type="image/png" href="/favicon.png" />
 
   <!-- Tailwind + Fonts -->
@@ -12,16 +18,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    :root{ --bg:#03040a; --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+    :root{
+      --bg:#03040a;--card:#071026;--muted:#94a3b8;
+      --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
     html,body{min-height:100%;background:linear-gradient(180deg,#02020a 0%, #04061a 100%);color:#e6eef8;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto;margin:0;padding:0}
 
-    /* rainbow */
+    /* Typing + rainbow text */
     .rainbow{background:linear-gradient(90deg,#ff0066,#ffcc00,#33ff00,#00ccff,#7a00ff);background-size:600% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:slide 7s linear infinite}
     @keyframes slide{0%{background-position:0% 50%}100%{background-position:100% 50%}}
     .caret::after{content:"|";margin-left:6px;animation:blink 1s step-end infinite}
     @keyframes blink{50%{opacity:0}}
 
-    /* stars */
+    /* Rocket star layers */
     .rocket-viewport{position:relative;height:360px;border-radius:16px;overflow:hidden;background:radial-gradient(ellipse at center,#04102a 0%, #000814 60%);box-shadow:0 10px 40px rgba(0,0,0,.7)}
     .stars{position:absolute;inset:0;background-repeat:repeat;pointer-events:none}
     .stars.layer1{background-image:radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.9) 40%, transparent 41%);background-size:1200px 600px;animation:move1 28s linear infinite}
@@ -31,12 +40,16 @@
     @keyframes move2{from{transform:translateX(0) translateY(0)}to{transform:translateX(-900px) translateY(-250px)}}
     @keyframes move3{from{transform:translateX(0) translateY(0)}to{transform:translateX(-600px) translateY(-120px)}}
 
-    /* colorful border (desktop) */
+    /* Shiny colorful animated border (per-card via CSS variable --g) */
     .shiny-card {
-      position: relative; border-radius: 14px; overflow: visible; padding: 18px;
-      background: var(--glass); border: 1px solid rgba(255,255,255,0.04);
-      transition: transform .18s ease, box-shadow .18s ease; cursor: pointer;
-      -webkit-tap-highlight-color: rgba(255,255,255,0.02); touch-action: manipulation;
+      position: relative;
+      border-radius: 14px;
+      overflow: visible;
+      padding: 18px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform .18s ease, box-shadow .18s ease, transform .18s ease;
+      cursor: pointer;
     }
     .shiny-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,.75) }
     .shiny-card::before{
@@ -53,37 +66,54 @@
       z-index: -1;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .shiny-card.selected { box-shadow: 0 22px 44px rgba(99,102,241,0.12); transform: translateY(-6px) scale(1.01); z-index: 40; }
+
+    .shiny-card.selected { box-shadow: 0 22px 44px rgba(99,102,241,0.12); transform: translateY(-8px) scale(1.02); z-index: 40; }
     .interest-badge { font-size: 12px; padding: 6px 8px; border-radius: 999px; background: rgba(255,255,255,0.04); display:inline-block; }
 
     .glass{background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px)}
     .text-slate-400 { color: #cbd5e1; }
 
+    /* joiner card */
     .joiner-card{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04)}
     .active-dot{width:10px;height:10px;border-radius:999px;background:#22c55e;box-shadow:0 0 8px #22c55e}
     .dot-pulse::after{content:"";position:absolute;left:-6px;top:-6px;width:22px;height:22px;border-radius:50%;background:rgba(34,197,94,0.12);animation:pulse 1.6s infinite}
-    @keyframes pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0)}
+    @keyframes pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0}}
 
-    /* Separator is static (NO dash animation) */
-    #separatorLine { position:absolute; left:0; right:0; height:60px; pointer-events:none; z-index:30; overflow:visible; opacity:0; transition:opacity 220ms ease; }
-    #sepPath { stroke-linecap: round; stroke-width: 3.6; fill:none; /* static stroke - no dash animation */ }
-
-    /* --- Mobile specific: stack cards, hide separator, disable glow via class --- */
-    @media (max-width: 768px) {
-      .rocket-viewport{height:240px}
-      #earnGrid { grid-template-columns: 1fr !important; display: grid; gap: 12px; }
-      .shiny-card { padding: 16px; border-radius: 12px; }
-      .shiny-card h3 { font-size: 18px; line-height: 1.1; }
-      .shiny-card p { font-size: 14px; }
-      #notifyBtn { padding: 12px 16px; font-size: 15px; }
-      #separatorLine { display: none; }
+    /* triangle marker (moving triangular indicator) */
+    #triangleMarker {
+      position: absolute;
+      width: 28px;
+      height: 20px;
+      pointer-events: none;
+      transform-origin: center;
+      transition: transform 420ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease;
+      z-index: 60;
+      opacity: 0;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.6));
     }
+    #separatorLine {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 60px;
+      pointer-events: none;
+      z-index: 30;
+      overflow: visible;
+      opacity: 0;
+      transition: opacity 240ms ease;
+    }
+    /* animated dash for shiny separator */
+    .shiny-stroke {
+      stroke-linecap: round;
+      stroke-width: 3.6;
+      stroke-dasharray: 240;
+      stroke-dashoffset: 240;
+      animation: dash 1.6s linear infinite;
+    }
+    @keyframes dash { to { stroke-dashoffset: 0; } }
 
-    /* Hide the animated ::before glow on touch devices by adding class `hasTouch` to html (see JS) */
-    html.hasTouch .shiny-card::before { display: none !important; }
-
-    /* Remove default tap highlight */
-    .shiny-card, .shiny-card * { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+    /* Responsive tweak */
+    @media (max-width:768px){ .rocket-viewport{height:240px} }
   </style>
 </head>
 <body>
@@ -105,7 +135,7 @@
         </h1>
         <p class="mt-5 text-slate-300 max-w-prose">A next-gen online business platform. Set new records in networking and unlock multiple earning streams. Don’t miss the launch — secure your spot now.</p>
 
-        <div class="mt-6 flex gap-3 flex-wrap">
+        <div class="mt-6 flex gap-3">
           <a href="#join" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-500/30 to-indigo-500/20 border border-cyan-400/20 text-cyan-200 font-semibold hover:scale-[1.02] transition" aria-label="Join the waitlist">Join the Waitlist</a>
 
           <!-- Button triggers OneSignal permission -->
@@ -151,10 +181,10 @@
     </section>
 
     <!-- Ways of earning -->
-    <section id="earn" class="mt-12 relative">
+    <section id="earn" class="mt-12" style="position:relative;">
       <h2 class="text-2xl md:text-3xl font-bold mb-6">Ways of earning <span class="rainbow">HELALINK Agencies — drop incoming</span></h2>
 
-      <!-- Static separator (desktop/tablet only) -->
+      <!-- SVG separator (animated line) sits above the cards, we'll position & draw a path as needed -->
       <svg id="separatorLine" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <linearGradient id="sepGrad" x1="0" x2="1">
@@ -163,11 +193,21 @@
             <stop offset="100%" stop-color="#66e0ff" stop-opacity="1"/>
           </linearGradient>
         </defs>
-        <path id="sepPath" d="" stroke="url(#sepGrad)" />
+        <path id="sepPath" d="" class="shiny-stroke" stroke="url(#sepGrad)" fill="none" stroke-linecap="round"/>
+      </svg>
+
+      <!-- Triangular marker -->
+      <svg id="triangleMarker" viewBox="0 0 28 20" aria-hidden="true">
+        <defs>
+          <linearGradient id="triGrad" x1="0" x2="1">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0.6"/>
+          </linearGradient>
+        </defs>
+        <polygon points="14,0 28,20 0,20" fill="url(#triGrad)" opacity="0.95"/>
       </svg>
 
       <div class="grid md:grid-cols-3 gap-4" id="earnGrid">
-        <!-- Cards (1..10) - same as you provided -->
         <!-- Card 1 - Affiliate -->
         <article class="shiny-card" data-key="affiliate" role="button" tabindex="0" aria-pressed="false" style="--g: conic-gradient(#ff7ab6, #ffcd5c, #7ef080, #66e0ff, #9b7bff);">
           <div class="flex items-start justify-between">
@@ -273,10 +313,11 @@
             <span class="text-xs text-slate-400">Exclusive drops</span>
           </div>
         </article>
+
       </div>
     </section>
 
-    <!-- Professional joiners -->
+    <!-- Professional joiners (simulated fallback) -->
     <section id="join" class="mt-16">
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-bold">Real-time Joiners</h2>
@@ -284,7 +325,9 @@
       </div>
 
       <div class="mt-4 grid md:grid-cols-2 gap-4">
-        <div class="glass rounded-2xl p-4"><div class="grid gap-3" id="professionalFeed"></div></div>
+        <div class="glass rounded-2xl p-4">
+          <div class="grid gap-3" id="professionalFeed"></div>
+        </div>
 
         <div class="glass rounded-2xl p-4 flex flex-col gap-3">
           <div class="font-semibold">Members Online</div>
@@ -316,40 +359,42 @@
   <!-- Toast -->
   <div id="toast" style="position:fixed;left:50%;transform:translateX(-50%);bottom:92px;background:#0b1220;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);display:none;z-index:1000;color:#e6eef8"></div>
 
-  <!-- OneSignal SDK (client) -->
+  <!-- OneSignal SDK (client) - using snippet you provided -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "cd687662-396c-413c-a462-dfb8c5890352",
+        allowLocalhostAsSecureOrigin: true,
+        welcomeNotification: { title: "HELALINK", message: "Thanks for enabling HELALINK notifications!" }
+      });
+      // expose for the rest of the script
+      window.OneSignalInstance = OneSignal;
+      console.log('OneSignal initialized (client).');
+    });
+  </script>
 
   <script>
-    /*****************************************************************
-     * Full JS: touch-detection (hides glow), stable card behavior,
-     * OneSignal robust init + prompt + subscription sync.
-     *
-     * NOTE: Put OneSignal service workers at your site root:
-     * /OneSignalSDKWorker.js
-     * /OneSignalSDKUpdaterWorker.js
-     * Both should contain: importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.worker.js');
-     *****************************************************************/
+    /************************************************************
+     * UI + Interaction logic:
+     * - single-select behavior for earnings cards (select one at a time)
+     * - show a moving triangular marker above the selected card
+     * - draw an animated shiny separator line near the selected card to "separate" it visually
+     * - sync interest tags to OneSignal when the user is subscribed
+     * - robust event wiring so buttons work
+     ************************************************************/
 
-    /* ---------- touch detection: adds html.hasTouch to hide animated ::before glow on touch devices ---------- */
-    (function setupTouchDetection(){
-      function mark() {
-        document.documentElement.classList.add('hasTouch');
-        window.removeEventListener('touchstart', mark, {passive:true});
-      }
-      window.addEventListener('touchstart', mark, {passive:true});
-    })();
-
-    /* ---------- small helper for toasts ---------- */
+    // helpers
     function showToast(msg, ms = 3500) {
       const t = document.getElementById('toast');
-      if (!t) return console.info('[toast]', msg);
       t.textContent = msg;
       t.style.display = 'block';
       clearTimeout(t._hideTimeout);
       t._hideTimeout = setTimeout(()=> t.style.display = 'none', ms);
     }
 
-    /* ---------- Basic typing + countdown (unchanged) ---------- */
+    // Typing + countdown
     const typeEl = document.getElementById('type');
     const phrases = ['Online Business Platform','Set New Records in Networking 🎊','HELALINK Agencies dropping soon ♦️','Launch: 13 Sep 2025 • 2PM EAT'];
     let pi=0, ci=0, deleting=false;
@@ -360,7 +405,7 @@
     function updateCountdown(){ const now=new Date(); let diff=Math.max(0, launchDate - now); const d=Math.floor(diff/86400000); diff -= d*86400000; const h=Math.floor(diff/3600000); diff -= h*3600000; const m=Math.floor(diff/60000); diff -= m*60000; const s=Math.floor(diff/1000); cd.textContent = `${d}d ${h}h ${m}m ${s}s`; }
     updateCountdown(); setInterval(updateCountdown,1000);
 
-    /* ---------- Simulated joiners (unchanged) ---------- */
+    // Simulated joiners (same as before)
     const professionalFeed = document.getElementById('professionalFeed');
     const onlineList = document.getElementById('onlineList');
     const names = ['Amina','Jayden','Fatma','Olu','Grace','Rashid','Ivy','Zara','Kofi','Liam','Tariq','Mira','Noah','Leah','Kwame','Nadia','Yusuf','Aaliyah'];
@@ -387,225 +432,278 @@
       `;
       return wrapper;
     }
-    function addLocalProfessional(){ const name = names[Math.floor(Math.random()*names.length)]; const cc = countries[Math.floor(Math.random()*countries.length)]; const joined = Date.now(); const entry = createProfessionalEntry({name,country:cc.c,flag:cc.f,joined}); professionalFeed.prepend(entry); while(professionalFeed.children.length>8) professionalFeed.lastElementChild.remove(); const onlineChip = document.createElement('div'); onlineChip.className='flex items-center gap-2 p-1 rounded-full bg-white/3'; onlineChip.innerHTML = `<img src="${avatar(name+cc.c)}" class="w-8 h-8 rounded-full"/><div class="text-xs font-medium">${name}</div>`; onlineList.prepend(onlineChip); while(onlineList.children.length>12) onlineList.lastElementChild.remove(); }
+    function addLocalProfessional(){
+      const name = names[Math.floor(Math.random()*names.length)];
+      const cc = countries[Math.floor(Math.random()*countries.length)];
+      const joined = Date.now();
+      const entry = createProfessionalEntry({name,country:cc.c,flag:cc.f,joined});
+      professionalFeed.prepend(entry);
+      while(professionalFeed.children.length>8) professionalFeed.lastElementChild.remove();
+
+      const onlineChip = document.createElement('div'); onlineChip.className='flex items-center gap-2 p-1 rounded-full bg-white/3';
+      onlineChip.innerHTML = `<img src="${avatar(name+cc.c)}" class="w-8 h-8 rounded-full"/><div class="text-xs font-medium">${name}</div>`;
+      onlineList.prepend(onlineChip);
+      while(onlineList.children.length>12) onlineList.lastElementChild.remove();
+    }
     for(let i=0;i<5;i++){ addLocalProfessional(); }
     setInterval(addLocalProfessional, 4200 + Math.random()*3000);
 
-    /* ---------- Stable selection (cards highlight only, no rolling border) ---------- */
+    // Interests: single-select behavior
+    const earnGrid = document.getElementById('earnGrid');
     const cardList = Array.from(document.querySelectorAll('.shiny-card[data-key]'));
     let selectedKey = localStorage.getItem('hl_selected_key') || null;
+
+    // Triangle marker + separator elements
+    const triangle = document.getElementById('triangleMarker');
     const separatorSVG = document.getElementById('separatorLine');
     const sepPath = document.getElementById('sepPath');
 
     function deselectAll() {
       cardList.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
-      selectedKey = null; localStorage.removeItem('hl_selected_key');
+      selectedKey = null;
+      localStorage.removeItem('hl_selected_key');
+      // hide visuals
+      triangle.style.opacity = '0';
       separatorSVG.style.opacity = '0';
-      // best-effort clear tags (if OneSignal available)
-      try { if (window.OneSignal && typeof OneSignal.sendTags === 'function') { const tags = {}; document.querySelectorAll('.shiny-card[data-key]').forEach(card=> tags['interest_' + card.getAttribute('data-key')] = '0'); OneSignal.sendTags(tags).catch(()=>{}); } } catch(e){}
-    }
-
-    function drawSeparatorStatic(card) {
-      if (window.matchMedia && window.matchMedia('(max-width:768px)').matches) { separatorSVG.style.opacity = '0'; return; }
-      const containerRect = separatorSVG.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      const sx = (cardRect.left + cardRect.width/2) - containerRect.left;
-      const sy = Math.max(8, (cardRect.top - containerRect.top) - 8);
-
-      let nearest = null; let nearestDist = Infinity;
-      cardList.forEach(c => { if (c === card) return; const r = c.getBoundingClientRect(); const center = { x: (r.left + r.width/2) - containerRect.left, y: Math.max(8, (r.top - containerRect.top) - 8) }; const d = Math.hypot(center.x - sx, center.y - sy); if (d < nearestDist) { nearestDist = d; nearest = center; } });
-
-      if (!nearest) { separatorSVG.style.opacity = '0'; return; }
-      separatorSVG.style.opacity = '1';
-      const svgW = Math.max(200, Math.round(containerRect.width));
-      const svgH = Math.max(40, Math.round(containerRect.height));
-      separatorSVG.setAttribute('viewBox', `0 0 ${svgW} ${svgH}`);
-
-      const startX = Math.max(8, Math.min(svgW - 8, Math.round(sx)));
-      const startY = Math.max(8, Math.min(svgH - 8, Math.round(sy)));
-      const endX = Math.max(8, Math.min(svgW - 8, Math.round(nearest.x)));
-      const endY = Math.max(8, Math.min(svgH - 8, Math.round(nearest.y)));
-      const midX = (startX + endX) / 2;
-      const ctrlY = Math.max(6, Math.min(svgH - 6, Math.min(startY, endY) - 20));
-      const d = `M ${startX} ${startY} C ${midX} ${ctrlY}, ${midX} ${ctrlY}, ${endX} ${endY}`;
-      sepPath.setAttribute('d', d);
-      // static stroke only; no dash animation
+      // If subscribed, clear tags to 0 for all interests
+      if (window.OneSignalInstance && typeof window.OneSignalInstance.sendTags === 'function') {
+        const tags = {};
+        document.querySelectorAll('.shiny-card[data-key]').forEach(card=> {
+          tags['interest_' + card.getAttribute('data-key')] = '0';
+        });
+        window.OneSignalInstance.sendTags(tags).catch(()=>{});
+      }
     }
 
     function selectCard(card) {
+      // single-select: deselect others
       deselectAll();
       card.classList.add('selected'); card.setAttribute('aria-pressed','true');
-      const key = card.getAttribute('data-key'); selectedKey = key; localStorage.setItem('hl_selected_key', key);
-      drawSeparatorStatic(card);
+      const key = card.getAttribute('data-key');
+      selectedKey = key;
+      localStorage.setItem('hl_selected_key', key);
 
-      // Sync tags if OneSignal ready (best-effort)
-      try {
-        if (window.OneSignal && typeof OneSignal.sendTags === 'function') {
-          const tags = {};
-          document.querySelectorAll('.shiny-card[data-key]').forEach(c => { const k = c.getAttribute('data-key'); tags['interest_' + k] = (k === key ? '1' : '0'); });
-          OneSignal.sendTags(tags).then(()=> showToast('Interest saved (we will notify you).')).catch(e => console.warn('sendTags failed', e));
-        } else {
-          localStorage.setItem('hl_pending_interest', JSON.stringify({ selected: key }));
-          showToast('Interest saved locally. Enable notifications to receive targeted messages.');
-        }
-      } catch(e){ localStorage.setItem('hl_pending_interest', JSON.stringify({ selected: key })); showToast('Interest saved locally. Enable notifications to receive targeted messages.'); }
-    }
+      // Move triangle marker to top-center of the selected card
+      const rect = card.getBoundingClientRect();
+      const rootRect = document.getElementById('pageRoot').getBoundingClientRect();
+      const triX = rect.left + rect.width/2 - rootRect.left - (triangle.clientWidth/2 || 14);
+      const triY = rect.top - rootRect.top - 18; // slightly above the card
+      triangle.style.transform = `translate(${Math.round(triX)}px, ${Math.round(triY)}px) scale(1)`;
+      triangle.style.opacity = '1';
 
-    cardList.forEach(card => {
-      card.addEventListener('click', (e) => { if ((e.target.tagName||'').toLowerCase() === 'a') return; selectCard(card); });
-      card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCard(card); } });
-    });
+      // Draw a shiny separator line between selected card and its nearest neighbor (to visually separate)
+      // We'll find the nearest other card (by center distance) and draw a curved path between centers
+      let nearest = null;
+      let nearestDist = Infinity;
+      const centerA = { x: rect.left + rect.width/2 - rootRect.left, y: rect.top + rect.height/2 - rootRect.top };
+      cardList.forEach(c => {
+        if (c === card) return;
+        const r = c.getBoundingClientRect();
+        const centerB = { x: r.left + r.width/2 - rootRect.left, y: r.top + r.height/2 - rootRect.top };
+        const dx = centerA.x - centerB.x, dy = centerA.y - centerB.y;
+        const d = Math.hypot(dx,dy);
+        if (d < nearestDist) { nearestDist = d; nearest = { rect: r, center: centerB }; }
+      });
 
-    const previous = localStorage.getItem('hl_selected_key');
-    if (previous) { const el = document.querySelector(`.shiny-card[data-key="${previous}"]`); if (el) { setTimeout(()=> selectCard(el), 220); } }
-    window.addEventListener('resize', () => { if (!selectedKey) return; const el = document.querySelector(`.shiny-card[data-key="${selectedKey}"]`); if (el) drawSeparatorStatic(el); }, { passive: true });
-    window.addEventListener('scroll', () => { if (!selectedKey) return; const el = document.querySelector(`.shiny-card[data-key="${selectedKey}"]`); if (el) drawSeparatorStatic(el); }, { passive: true });
-
-    /* ---------- OneSignal robust initialization & prompt flow (improved) ---------- */
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      try {
-        OneSignal.init({
-          appId: "cd687662-396c-413c-a462-dfb8c5890352",
-          allowLocalhostAsSecureOrigin: true,
-          welcomeNotification: { title: "HELALINK", message: "Thanks for enabling HELALINK notifications!" },
-          notifyButton: { enable: false }
-        });
-        console.log('[OneSignal] init called');
-      } catch(e) { console.warn('[OneSignal] init error', e); }
-    });
-
-    // helper to detect presence of OneSignal API methods (and fallback gracefully)
-    function oneSignalAvailable() {
-      return !!(window.OneSignal && OneSignal.push);
-    }
-
-    async function isSubscribed() {
-      try {
-        if (!oneSignalAvailable()) return false;
-        return await new Promise(resolve => {
-          OneSignal.push(async function() {
-            try {
-              if (typeof OneSignal.isPushNotificationsEnabled === 'function') {
-                const enabled = await OneSignal.isPushNotificationsEnabled();
-                resolve(!!enabled);
-              } else if (typeof OneSignal.getUserId === 'function') {
-                const id = await OneSignal.getUserId();
-                resolve(!!id);
-              } else resolve(false);
-            } catch (err) { console.warn('[OneSignal] check error', err); resolve(false); }
-          });
-        });
-      } catch(e) { console.warn('isSubscribed error', e); return false; }
-    }
-
-    async function promptForNotifications() {
-      const isTouch = (/Mobi|Android|iPhone|iPad|iPod/).test(navigator.userAgent) || window.innerWidth < 768;
-
-      if (!oneSignalAvailable()) {
-        showToast('Notification SDK not loaded — requesting browser permission as fallback...');
-        try { const p = await Notification.requestPermission(); return p === 'granted'; } catch(e){ console.warn('Notification.requestPermission fallback failed', e); return false; }
+      if (nearest) {
+        separatorSVG.style.opacity = '1';
+        // map separator SVG viewBox size to pageRoot width (we'll update viewBox dynamically)
+        const svgLeft = 0;
+        const svgWidth = rootRect.width;
+        const svgHeight = separatorSVG.clientHeight || 60;
+        separatorSVG.setAttribute('viewBox', `0 0 ${svgWidth} ${svgHeight}`);
+        // draw path from a point slightly above selected card to slightly above nearest card
+        const startX = centerA.x;
+        const startY = Math.max(12, rect.top - rootRect.top - 6); // above card top
+        const endX = nearest.center.x;
+        const endY = Math.max(12, nearest.rect.top - rootRect.top - 6);
+        // Use a smooth cubic Bezier curve
+        const ctrlX1 = startX;
+        const ctrlY1 = (startY + endY)/2 - 20;
+        const ctrlX2 = endX;
+        const ctrlY2 = (startY + endY)/2 - 20;
+        const d = `M ${startX} ${startY} C ${ctrlX1} ${ctrlY1}, ${ctrlX2} ${ctrlY2}, ${endX} ${endY}`;
+        sepPath.setAttribute('d', d);
+        // ensure path length animation restarts
+        void sepPath.getBoundingClientRect();
+      } else {
+        separatorSVG.style.opacity = '0';
       }
 
-      return await new Promise(resolve => {
-        OneSignal.push(async function() {
-          try {
-            // prefer native prompts on mobile, slidedown on desktop if available
-            if (isTouch && typeof OneSignal.showNativePrompt === 'function') {
-              await OneSignal.showNativePrompt();
-            } else if (!isTouch && typeof OneSignal.showSlidedownPrompt === 'function') {
-              await OneSignal.showSlidedownPrompt();
-            } else if (typeof OneSignal.registerForPushNotifications === 'function') {
-              await OneSignal.registerForPushNotifications();
-            } else {
-              // fallback to browser permission
-              const p = await Notification.requestPermission();
-              if (p !== 'granted') { resolve(false); return; }
-            }
-
-            // small delay then check status
-            setTimeout(async () => { const enabled = await isSubscribed(); resolve(enabled); }, 700);
-          } catch (err) {
-            console.warn('[OneSignal] prompt error', err);
-            try { const p = await Notification.requestPermission(); resolve(p === 'granted'); } catch(e){ resolve(false); }
-          }
+      // If subscribed to OneSignal, send tags: set selected interest to 1, others to 0
+      if (window.OneSignalInstance && typeof window.OneSignalInstance.sendTags === 'function') {
+        const tags = {};
+        document.querySelectorAll('.shiny-card[data-key]').forEach(c => {
+          const k = c.getAttribute('data-key');
+          tags['interest_' + k] = (k === key ? '1' : '0');
         });
-      });
+        window.OneSignalInstance.sendTags(tags).then(()=> {
+          showToast('Interest saved (we will notify you).');
+        }).catch(e => {
+          console.warn('sendTags failed', e);
+        });
+      } else {
+        // not subscribed yet: persist interest locally (we'll sync on subscribe)
+        localStorage.setItem('hl_pending_interest', JSON.stringify({ selected: key }));
+        showToast('Interest saved locally. Enable notifications to receive targeted messages.');
+      }
     }
 
-    // subscriptionChange listener to auto-sync tags on subscription update
-    OneSignal.push(function() {
-      try {
-        if (typeof OneSignal.on === 'function') {
-          OneSignal.on('subscriptionChange', async function(isSubscribedNow) {
-            console.log('[OneSignal] subscriptionChange ->', isSubscribedNow);
-            if (isSubscribedNow) {
-              try {
-                const tags = { helalink_subscribed: '1', signup_source: 'web-landing' };
-                const storedSelected = localStorage.getItem('hl_selected_key');
-                document.querySelectorAll('.shiny-card[data-key]').forEach(card => { const k = card.getAttribute('data-key'); tags['interest_' + k] = (storedSelected && storedSelected === k) ? '1' : '0'; });
-                if (typeof OneSignal.sendTags === 'function') await OneSignal.sendTags(tags);
-                localStorage.removeItem('hl_pending_interest');
-                showToast('Notifications enabled ✅');
-              } catch(e) { console.warn('[OneSignal] subscription-change tag sync failed', e); }
-            } else {
-              showToast('Notifications are not enabled.');
-            }
-          });
-        }
-      } catch(e) { console.warn('subscriptionChange setup failed', e); }
+    // wire card click handlers (and keyboard)
+    cardList.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if ((e.target.tagName||'').toLowerCase() === 'a') return; // allow links
+        selectCard(card);
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCard(card); }
+      });
     });
 
-    // wire notify button
-    const notifyBtn = document.getElementById('notifyBtn');
-    if (notifyBtn) {
-      notifyBtn.addEventListener('click', async () => {
-        showToast('Opening permission prompt...');
-        const allowed = await promptForNotifications();
-        console.log('[OneSignal] prompt result ->', allowed);
-        if (allowed) {
-          OneSignal.push(async function() {
-            try {
-              const tags = { helalink_subscribed: '1', signup_source: 'web-landing' };
-              const storedSelected = localStorage.getItem('hl_selected_key');
-              document.querySelectorAll('.shiny-card[data-key]').forEach(c => {
-                const k = c.getAttribute('data-key');
-                tags['interest_' + k] = (storedSelected && storedSelected === k) ? '1' : '0';
-              });
-              if (typeof OneSignal.sendTags === 'function') await OneSignal.sendTags(tags);
-              localStorage.removeItem('hl_pending_interest');
-              showToast('Notifications enabled ✅');
-              console.log('[OneSignal] tags sent after permission');
-            } catch (e) { console.warn('[OneSignal] tag sync fail', e); showToast('Enabled but tag sync failed (check console).'); }
-          });
-        } else {
-          showToast('Permission denied or blocked. See browser settings.');
-          setTimeout(() => {
-            showToast('If you previously blocked notifications, open browser settings → Site settings → Notifications and allow the site.');
-          }, 1200);
-        }
-      });
-
-      notifyBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); notifyBtn.click(); } });
+    // restore selection if present
+    const previous = localStorage.getItem('hl_selected_key');
+    if (previous) {
+      const el = document.querySelector(`.shiny-card[data-key="${previous}"]`);
+      if (el) {
+        // slight delay to allow layout
+        setTimeout(()=> selectCard(el), 200);
+      }
     }
 
-    // initial sync: if subscription already exists, send tags
-    (async function initialSyncIfNeeded(){
+    // When window resizes, reposition triangle & separator if needed
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (!selectedKey) return;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(()=> {
+        const el = document.querySelector(`.shiny-card[data-key="${selectedKey}"]`);
+        if (el) selectCard(el);
+      }, 150);
+    });
+
+    // ---- OneSignal integration wiring for the Enable Notifications button ----
+    document.getElementById('notifyBtn').addEventListener('click', async () => {
       try {
-        const subscribed = await isSubscribed();
-        if (subscribed && typeof OneSignal.sendTags === 'function') {
-          const tags = { helalink_subscribed: '1', signup_source: 'web-landing' };
-          const storedSelected = localStorage.getItem('hl_selected_key');
-          document.querySelectorAll('.shiny-card[data-key]').forEach(card => { const k = card.getAttribute('data-key'); tags['interest_' + k] = (storedSelected && storedSelected === k) ? '1' : '0'; });
-          OneSignal.sendTags(tags).catch(e => console.warn('[OneSignal] init sync error', e));
-          localStorage.removeItem('hl_pending_interest');
-          console.log('[OneSignal] initial sync done');
+        // Wait for OneSignalInstance to be initialized (the SDK uses OneSignalDeferred)
+        const waitForOneSignal = () => new Promise((resolve) => {
+          const max = 8000; let waited = 0;
+          const iv = setInterval(() => {
+            if (window.OneSignalInstance) { clearInterval(iv); resolve(true); }
+            waited += 200;
+            if (waited >= max) { clearInterval(iv); resolve(false); }
+          }, 200);
+        });
+        const loaded = await waitForOneSignal();
+        if (!loaded) {
+          showToast('Notification system is still loading. Please try again in a moment.');
+          return;
         }
-      } catch(e) { console.warn('[OneSignal] initialSyncIfNeeded error', e); }
+        const OneSignal = window.OneSignalInstance;
+
+        // Use native prompt if available
+        try {
+          if (typeof OneSignal.showNativePrompt === 'function') {
+            await OneSignal.showNativePrompt();
+          } else if (typeof OneSignal.showSlidedownPrompt === 'function') {
+            await OneSignal.showSlidedownPrompt();
+          } else if (typeof OneSignal.registerForPushNotifications === 'function') {
+            await OneSignal.registerForPushNotifications();
+          } else {
+            // fallback to Notification permission
+            const p = await Notification.requestPermission();
+            if (p !== 'granted') {
+              showToast('Permission denied.');
+              return;
+            }
+          }
+        } catch (err) {
+          console.warn('Prompt failed, fallback to Notification API', err);
+          try { await Notification.requestPermission(); } catch(e) {}
+        }
+
+        // After prompting, check subscription state and sync tags if subscribed
+        try {
+          const isEnabled = await OneSignal.isPushNotificationsEnabled();
+          if (isEnabled) {
+            // mark subscribed locally
+            localStorage.setItem('hl_subscribed', '1');
+            // send baseline tags + interest (if any)
+            const tags = { helalink_subscribed: '1', signup_source: 'web-landing' };
+            const pending = JSON.parse(localStorage.getItem('hl_pending_interest') || 'null');
+            const storedSelected = localStorage.getItem('hl_selected_key');
+            // set interest tags explicitly for all keys
+            document.querySelectorAll('.shiny-card[data-key]').forEach(card => {
+              const k = card.getAttribute('data-key');
+              if (storedSelected && storedSelected === k) tags['interest_' + k] = '1';
+              else if (pending && pending.selected === k) tags['interest_' + k] = '1';
+              else tags['interest_' + k] = '0';
+            });
+            await OneSignal.sendTags(tags);
+            showToast('Notifications enabled ✅');
+          } else {
+            showToast('Notifications are blocked or not enabled.');
+          }
+        } catch (e) {
+          console.warn('post-permission handling error', e);
+          showToast('Could not complete subscription steps. Check console.');
+        }
+
+      } catch (err) {
+        console.error('notifyBtn top-level error', err);
+        showToast('Something went wrong. See console for details.');
+      }
+    });
+
+    // Sync local pending interest once OneSignal initialized and subscription exists
+    (function waitForOneSignalAndSync() {
+      const trySync = async () => {
+        if (!window.OneSignalInstance) { setTimeout(trySync, 400); return; }
+        const OneSignal = window.OneSignalInstance;
+        try {
+          const enabled = await OneSignal.isPushNotificationsEnabled();
+          if (enabled) {
+            const tags = { helalink_subscribed: '1', signup_source: 'web-landing' };
+            const storedSelected = localStorage.getItem('hl_selected_key');
+            document.querySelectorAll('.shiny-card[data-key]').forEach(card => {
+              const k = card.getAttribute('data-key');
+              tags['interest_' + k] = (storedSelected && storedSelected === k) ? '1' : '0';
+            });
+            await OneSignal.sendTags(tags);
+            // clear pending
+            localStorage.removeItem('hl_pending_interest');
+            console.log('Synced tags to OneSignal on init.');
+          }
+        } catch(e) {
+          // ignore - will retry later only if user interacts
+          console.warn('initial tag sync failed', e);
+        }
+      };
+      setTimeout(trySync, 600);
     })();
 
-    // final helpful console message
-    console.info('If notifications still won’t prompt: 1) Ensure your site is HTTPS, 2) Place OneSignal worker files at site root (OneSignalSDKWorker.js / OneSignalSDKUpdaterWorker.js with `importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.worker.js");`), 3) Check site Notifications in browser settings, 4) Disable adblockers when testing.');
+    // allow clicking outside to deselect (optional)
+    document.addEventListener('click', (e) => {
+      const within = e.target.closest('.shiny-card');
+      const inNotifyBtn = e.target.closest('#notifyBtn');
+      if (!within && !inNotifyBtn) {
+        // do nothing on body clicks? user asked to separate/isolated selection - we keep selection until user clicks another card.
+        // If you prefer clicking outside to deselect, uncomment:
+        // deselectAll();
+      }
+    });
+
+    // small accessibility: allow Enter on notify button
+    document.getElementById('notifyBtn').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
+    });
+
+    // ensure anchor links open normally (no accidental preventDefault)
+    document.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        // allow default behaviour
+      });
+    });
+
   </script>
 </body>
 </html>
