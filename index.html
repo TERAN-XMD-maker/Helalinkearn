@@ -402,23 +402,28 @@
 
   <!-- OneSignal SDK (client) -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-  <script>
-    // OneSignal deferred init (user-supplied App ID)
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function(OneSignal) {
-      try {
-        await OneSignal.init({
-          appId: "cd687662-396c-413c-a462-dfb8c5890352",
-          allowLocalhostAsSecureOrigin: true,
-          welcomeNotification: { title: "HELALINK", message: "Thanks for enabling HELALINK notifications!" }
-        });
-        window.OneSignalInstance = OneSignal;
-        console.log('OneSignal initialized (client).');
-      } catch (e) {
-        console.warn('OneSignal init error', e);
+ <!-- OneSignal: SDK + init -->
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+<script>
+  // Standard OneSignal init (works reliably)
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "cd687662-396c-413c-a462-dfb8c5890352", // <--- keep your App ID here
+      allowLocalhostAsSecureOrigin: true,           // handy for local testing
+      welcomeNotification: {
+        title: "HELALINK",
+        message: "Thanks for enabling HELALINK notifications!"
       }
+      // you can add autoRegister: false, persistentNotification, etc here if needed
     });
-  </script>
+
+    // expose a stable instance for your existing page logic
+    window.OneSignalInstance = OneSignal;
+
+    console.log("OneSignal initialized.");
+  });
+</script>
 
   <script>
     /************************************************************
