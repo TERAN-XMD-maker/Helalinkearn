@@ -6,11 +6,11 @@
   <title>HELALINK • Official Launch 13 Sep 2025 (2PM EAT)</title>
   <meta name="description" content="HELALINK – Online business platform. Launching 13 Sep 2025. Join now, get updates, and start earning through multiple methods." />
 
-  <!-- Tailwind + Fonts -->
+  <!-- Tailwind (CDN) + Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- PushEngage snippet (head is fine) -->
+  <!-- PushEngage snippet (left exactly as you pasted it) -->
   <script>
   (function(w, d) {
     w.PushEngage = w.PushEngage || [];
@@ -40,6 +40,7 @@
     .caret::after{content:"|";margin-left:6px;animation:blink 1s step-end infinite}
     @keyframes blink{50%{opacity:0}}
 
+    /* Hero / rocket */
     .rocket-viewport{position:relative;height:360px;border-radius:16px;overflow:hidden;background:radial-gradient(ellipse at center,#04102a 0%, #000814 60%);box-shadow:0 10px 40px rgba(0,0,0,.7)}
     .stars{position:absolute;inset:0;background-repeat:repeat;pointer-events:none}
     .stars.layer1{background-image:radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.9) 40%, transparent 41%);background-size:1200px 600px;animation:move1 28s linear infinite}
@@ -49,94 +50,55 @@
     @keyframes move2{from{transform:translateX(0) translateY(0)}to{transform:translateX(-900px) translateY(-250px)}}
     @keyframes move3{from{transform:translateX(0) translateY(0)}to{transform:translateX(-600px) translateY(-120px)}}
 
+    /* Card (pad) */
     .shiny-card {
       position: relative;
       border-radius: 14px;
       overflow: hidden;
       padding: 18px;
       background: var(--cardbg, var(--glass));
-      border: 1px solid rgba(255,255,255,0.03);
-      transition: transform .18s ease, box-shadow .18s ease;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
       cursor: pointer;
-      min-height:94px;
+      min-height:120px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
     .shiny-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,.75) }
     .shiny-card .content { position:relative; z-index: 1; }
-    .shiny-card.selected { box-shadow: 0 22px 44px rgba(99,102,241,0.12); transform: translateY(-8px) scale(1.02); z-index: 40; }
-    .interest-badge { font-size: 12px; padding: 6px 8px; border-radius: 999px; background: rgba(255,255,255,0.04); display:inline-block; }
+    .shiny-card.selected{ outline: 3px solid rgba(255,255,255,0.06); box-shadow: 0 30px 60px rgba(0,0,0,0.6); transform: translateY(-8px) }
+    .shiny-card .meta { margin-top:12px; display:flex;justify-content:space-between;align-items:center }
+    .interest-badge { font-size: 12px; padding: 6px 8px; border-radius: 999px; background: rgba(0,0,0,0.12); display:inline-block; }
 
+    /* notify button + mini countdown */
+    .notify-btn { display:inline-flex; align-items:center; gap:10px; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); background:linear-gradient(90deg,#05202b,#071326); color:#cfeeff; font-weight:800; cursor:pointer; }
+    .notify-mini { font-family:monospace; font-weight:800; font-size:13px; color:#cfe3ff; background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px }
+
+    /* confetti & congrats */
+    #confettiWrap{ position: fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:1500; overflow:visible; }
+    .confetti { position:absolute; width:8px; height:12px; opacity:0.95; border-radius:2px; transform-origin:center; animation:confettiFall 1600ms linear forwards; }
+    @keyframes confettiFall { 0%{ transform:translateY(-10vh) rotate(0) } 100%{ transform:translateY(120vh) rotate(720deg) } }
+    .congratsPill{ position:fixed;left:50%;transform:translateX(-50%);bottom:120px;background:linear-gradient(90deg,#10b981,#60a5fa);color:#02121b;padding:12px 18px;border-radius:999px;font-weight:700;z-index:1600;display:none }
+
+    /* hand pointer */
+    #handPointer{ position:fixed; width:64px; height:64px; right:22px; bottom:110px; z-index:1700; pointer-events:none; opacity:0; transition:opacity .22s ease }
+    #handPointer svg{ animation: handWiggle 1100ms infinite ease-in-out; transform-origin:center }
+    @keyframes handWiggle{ 0%{transform:translateY(0)}40%{transform:translateY(-6px) rotate(-6deg)}80%{transform:translateY(0) rotate(2deg)}100%{transform:translateY(0)} }
+
+    /* small helpers */
     .glass{background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px)}
     .text-slate-400 { color: #cbd5e1; }
+    .earn-grid { display:grid; gap:16px; grid-template-columns: repeat(1,1fr); }
+    @media(min-width:640px){ .earn-grid{ grid-template-columns: repeat(2,1fr); } }
+    @media(min-width:1024px){ .earn-grid{ grid-template-columns: repeat(3,1fr); } }
+    @media(min-width:1280px){ .earn-grid{ grid-template-columns: repeat(4,1fr); } }
 
-    #confettiWrap{ position: fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:1500; overflow:visible; }
-    .confetti { position:absolute; width:10px; height:16px; opacity:0.95; border-radius:2px; transform-origin:center; animation:confettiFall 1600ms linear forwards; }
-    @keyframes confettiFall {
-      0% { transform: translateY(-10vh) rotate(0) scale(1); opacity:1; }
-      100% { transform: translateY(120vh) rotate(720deg) scale(.9); opacity:0; }
-    }
-    .congratsPill {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%) scale(.9);
-      bottom: 120px;
-      background: linear-gradient(90deg,#10b981,#60a5fa);
-      color:#02121b;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight:700;
-      z-index:1600;
-      box-shadow: 0 10px 30px rgba(0,0,0,.6);
-      opacity:0;
-      pointer-events:none;
-      animation: popIn .5s ease forwards;
-    }
-    @keyframes popIn {
-      0% { transform: translateX(-50%) translateY(8px) scale(.96); opacity:0; }
-      60% { transform: translateX(-50%) translateY(-6px) scale(1.05); opacity:1; }
-      100% { transform: translateX(-50%) translateY(0) scale(1); opacity:1; }
-    }
+    /* accessible focus */
+    .shiny-card:focus{ outline:3px solid rgba(99,102,241,0.12); outline-offset:2px }
 
-    #handPointer {
-      position: fixed;
-      width: 64px;
-      height: 64px;
-      right: 22px;
-      bottom: 110px;
-      z-index: 1700;
-      pointer-events: none;
-      transform-origin: center;
-      opacity: 0;
-      transition: opacity 220ms ease;
-    }
-    #handPointer .hand { animation: handWiggle 1200ms infinite ease-in-out; transform-origin: center; }
-    @keyframes handWiggle {
-      0% { transform: translateY(0) rotate(0deg); }
-      40% { transform: translateY(-6px) rotate(-6deg); }
-      80% { transform: translateY(0) rotate(2deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-    }
-
-    /* Countdown in hero */
-    .countdown-pill {
-      display:inline-flex; align-items:center; gap:12px;
-      background: linear-gradient(90deg,#0b1220,#081023);
-      padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 6px 20px rgba(2,6,23,.5);
-      color:#dbeafe; font-weight:700; font-size:14px;
-    }
-    .countdown-small { font-size:12px; color:#bcd3f6; font-weight:600; }
-
-    /* Responsive tweak */
-    @media (max-width:1024px){
-      .rocket-viewport{height:240px}
-      #handPointer { right: 16px; bottom: 110px; width:56px; height:56px; }
-    }
-    @media (max-width:640px){
-      .grid-cols-responsive { grid-template-columns: 1fr !important; }
-      .shiny-card { padding:18px; min-height:88px; }
-      #handPointer { right: 14px; bottom: 120px; width:48px; height:48px; }
-      .congratsPill { bottom: 100px; font-size:14px; padding:10px 14px; }
-    }
+    /* small responsive tweaks */
+    @media(max-width:640px){ .rocket-viewport{height:220px} #handPointer{right:14px;bottom:120px;width:48px;height:48px} .shiny-card{min-height:110px;padding:14px} }
   </style>
 </head>
 <body>
@@ -149,7 +111,7 @@
   </header>
 
   <main class="max-w-6xl mx-auto px-4 pt-10 pb-28" id="pageRoot" style="position:relative;">
-    <!-- Hero & Rocket -->
+    <!-- Hero -->
     <section class="grid md:grid-cols-2 gap-8 items-start">
       <div>
         <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
@@ -161,28 +123,35 @@
         <div class="mt-6 flex gap-3 items-center">
           <a href="#join" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-500/30 to-indigo-500/20 border border-cyan-400/20 text-cyan-200 font-semibold hover:scale-[1.02] transition" aria-label="Join the waitlist">Join the Waitlist</a>
 
-          <!-- Button triggers PushEngage permission -->
-          <button id="notifyBtn" class="px-5 py-3 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 font-semibold hover:scale-[1.02] transition" aria-label="Enable Notifications">Enable Notifications 🔔</button>
+          <!-- Press Here button (PushEngage usage: subscribe) -->
+          <button id="notifyBtn" class="notify-btn" aria-label="Press to enable notifications">
+            <span class="notify-label">Press Here 🔔</span>
+            <span id="notifyMini" class="notify-mini" aria-live="polite" aria-atomic="true">--d --h</span>
+          </button>
 
           <a href="https://wa.me/254717028877?text=Hi%20HELALINK%20team!%20I%20want%20to%20join%20the%20launch%20waitlist." target="_blank" class="px-4 py-3 rounded-2xl bg-amber-500/10 border border-amber-400/20 text-amber-300 font-semibold hover:scale-[1.02] transition" aria-label="Join via WhatsApp">Join via WhatsApp</a>
         </div>
 
         <p class="mt-3 text-xs text-slate-400">We’ll send launch alerts and offers. You can opt out anytime.</p>
 
-        <!-- Countdown moved here (hero) -->
+        <!-- Countdown (hero) -->
         <div class="mt-6">
-          <div class="countdown-pill" id="heroCountdown" role="status" aria-live="polite">
-            <div>
-              <div class="text-xs text-slate-400">Liftoff in</div>
-              <div id="countdown" style="font-family:monospace;font-weight:800;font-size:16px">—d —h —m —s</div>
+          <div class="countdown-pill glass" id="heroCountdown" role="status" aria-live="polite" aria-atomic="true">
+            <div style="display:flex;gap:12px;align-items:center">
+              <div style="display:flex;gap:8px">
+                <div class="count-unit" title="Days remaining"><div class="count-number" id="cdDays">--</div><div class="count-label">Days</div></div>
+                <div class="count-unit" title="Hours remaining"><div class="count-number" id="cdHours">--</div><div class="count-label">Hours</div></div>
+                <div class="count-unit" title="Minutes remaining"><div class="count-number" id="cdMinutes">--</div><div class="count-label">Minutes</div></div>
+                <div class="count-unit" title="Seconds remaining"><div class="count-number" id="cdSeconds">--</div><div class="count-label">Seconds</div></div>
+              </div>
+              <div class="countdown-small ml-4">13 Sep 2025 • 2:00 PM EAT</div>
             </div>
-            <div class="countdown-small ml-4">13 Sep 2025 • 2:00 PM EAT</div>
           </div>
         </div>
 
         <div class="mt-4 glass rounded-2xl p-4" role="note">
           <h4 class="font-semibold">Notification schedule (example)</h4>
-          <p class="text-sm text-slate-300">If you enable notifications we'll register your browser token and can send 3 scheduled notifications: <strong>24 hours before</strong>, <strong>1 hour before</strong>, and <strong>at launch</strong>. You can also pick interests by tapping any "Ways of earning".</p>
+          <p class="text-sm text-slate-300">If you enable notifications we'll register your browser token and can send 3 scheduled notifications: <strong>24 hours before</strong>, <strong>1 hour before</strong>, and <strong>at launch</strong>. Pick interests below to personalize messages.</p>
         </div>
       </div>
 
@@ -193,18 +162,13 @@
 
         <div class="rocket-center" style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);z-index:20;pointer-events:none">
           <!-- Rocket SVG -->
-          <svg class="rocket-svg" viewBox="0 0 120 240" xmlns="http://www.w3.org/2000/svg" width="220" aria-hidden="true">
-            <defs>
-              <linearGradient id="rb2" x1="0" x2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient>
-            </defs>
+          <svg viewBox="0 0 120 240" width="220" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="rb2" x1="0" x2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient></defs>
             <g>
               <path d="M60 14 C74 40 78 84 78 114 L42 114 C42 84 46 40 60 14Z" fill="url(#rb2)" stroke="#ffffff14" stroke-width="1"/>
               <rect x="44" y="114" width="32" height="46" rx="8" fill="#ffffff09"/>
               <circle cx="60" cy="64" r="12" fill="#020316" stroke="#c7d2fe" stroke-width="1"/>
-              <g id="flame">
-                <path d="M60 158 C54 182 54 210 60 226 C66 210 66 182 60 158Z" fill="#fb923c"/>
-                <path d="M60 170 C56 188 56 200 60 212 C64 200 64 188 60 170Z" fill="#ef4444"/>
-              </g>
+              <g id="flame"><path d="M60 158 C54 182 54 210 60 226 C66 210 66 182 60 158Z" fill="#fb923c"/><path d="M60 170 C56 188 56 200 60 212 C64 200 64 188 60 170Z" fill="#ef4444"/></g>
               <text x="60" y="58" text-anchor="middle" style="font-family:'Space Grotesk',Inter,system-ui;fill:#ffffffcc;font-weight:700;font-size:10px;letter-spacing:2px">HELALINK</text>
             </g>
           </svg>
@@ -218,64 +182,225 @@
     <section id="earn" class="mt-12" style="position:relative;">
       <h2 class="text-2xl md:text-3xl font-bold mb-6">Ways of earning <span class="rainbow">HELALINK Agencies — drop incoming</span></h2>
 
-      <div class="grid gap-4 grid-cols-responsive md:grid-cols-3" id="earnGrid" style="display:grid;grid-template-columns:repeat(1,1fr);">
-        <!-- Card 1 - Affiliate (green-ish bg) -->
+      <div class="earn-grid" id="earnGrid">
+        <!-- 1 -->
         <article class="shiny-card" data-key="affiliate" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(26,209,132,0.06), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(34,197,94,0.06), rgba(255,255,255,0.01));">
           <div class="content">
-            <div class="flex items-start justify-between">
-              <div>
-                <h3 class="earn-title font-bold text-lg text-emerald-300">1. Multi-level Affiliate Program</h3>
-                <p class="mt-2 text-sm text-slate-200">Refer users and agencies to HELALINK and earn multi-tier commissions. Earn from direct referrals plus a percentage of activity from your network tiers.</p>
-              </div>
-              <div class="ml-2 text-xs text-slate-400">
-                <span class="interest-badge">Agencies</span>
-              </div>
-            </div>
-            <div class="mt-3 flex items-center justify-between">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20join%20HELALINK%20affiliate" target="_blank" rel="noopener">Join via WhatsApp</a>
+            <h3 class="font-bold text-lg text-emerald-300">Multi-level Affiliate Program</h3>
+            <p class="mt-2 text-sm text-slate-200">Refer users and agencies and earn multi-tier commissions from your direct and network activity.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20join%20HELALINK%20affiliate" target="_blank">Join via WhatsApp</a>
+              <span class="text-xs text-slate-400">Agencies</span>
             </div>
           </div>
         </article>
 
-        <!-- ... other cards (kept the same structure) ... -->
-
-        <!-- Card 2 -->
+        <!-- 2 -->
         <article class="shiny-card" data-key="videos" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(255,208,166,0.04), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,205,86,0.06), rgba(255,255,255,0.01));">
           <div class="content">
-            <h3 class="earn-title font-bold text-lg text-amber-300">2. Watch Sponsored Videos</h3>
-            <p class="mt-2 text-sm text-slate-200">Watch short sponsored YouTube and TikTok videos, validate the views, and receive credits. Credits convert to cash or platform features like roulette.</p>
-            <div class="mt-3 flex items-center justify-between">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20earn%20by%20watching%20videos" target="_blank" rel="noopener">Start Earning</a>
+            <h3 class="font-bold text-lg text-amber-300">Watch Sponsored Videos</h3>
+            <p class="mt-2 text-sm text-slate-200">Watch short sponsored clips, validate views and receive credits that convert to cash or features.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20earn%20by%20watching%20videos" target="_blank">Start Earning</a>
               <span class="text-xs text-slate-400">Per video payout</span>
             </div>
           </div>
         </article>
 
-        <!-- Card 3 -->
+        <!-- 3 -->
         <article class="shiny-card" data-key="roulette" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(255,159,159,0.04), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,140,172,0.04), rgba(255,255,255,0.01));">
           <div class="content">
-            <h3 class="earn-title font-bold text-lg text-pink-300">3. Roulette Casino Spin</h3>
-            <p class="mt-2 text-sm text-slate-200">Use earned credits to play the roulette. Win prizes, bonuses, and multipliers. Responsible play is enforced.</p>
-            <div class="mt-3 flex items-center justify-between">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20try%20the%20roulette" target="_blank" rel="noopener">Play via WhatsApp</a>
+            <h3 class="font-bold text-lg text-pink-300">Roulette / Casino Spin</h3>
+            <p class="mt-2 text-sm text-slate-200">Use earned credits to spin and win prizes, multipliers and bonuses. Play responsibly.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20try%20the%20roulette" target="_blank">Play via WhatsApp</a>
               <span class="text-xs text-slate-400">Win prizes & bonuses</span>
             </div>
           </div>
         </article>
 
-        <!-- keep rest of cards (games, ads, forex, ai, nft, writing, gifts) - omitted here for brevity but included in your real file -->
-        <!-- ... -->
+        <!-- 4 -->
+        <article class="shiny-card" data-key="games" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(140,87,255,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-violet-300">Games & Quests</h3>
+            <p class="mt-2 text-sm text-slate-200">Complete in-app quests and games to win badges, credits and seasonal rewards.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20play%20games" target="_blank">Try Games</a>
+              <span class="text-xs text-slate-400">Daily quests</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="shiny-card" data-key="ads" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(96,165,250,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-sky-300">Ads Monetization</h3>
+            <p class="mt-2 text-sm text-slate-200">Place ads on your profile or content pages and earn a share of revenue per view/click.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20monetize%20ads" target="_blank">Monetize</a>
+              <span class="text-xs text-slate-400">Revenue share</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="shiny-card" data-key="trading" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(34,211,238,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-cyan-200">Forex & Trading Signals</h3>
+            <p class="mt-2 text-sm text-slate-200">Receive trade signals, copy strategies, and earn from spreads and successful trades.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20trading%20signals" target="_blank">Get Signals</a>
+              <span class="text-xs text-slate-400">Education & copy</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="shiny-card" data-key="staking" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(16,185,129,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-emerald-300">Staking & Savings</h3>
+            <p class="mt-2 text-sm text-slate-200">Lock tokens or credits to earn interest and platform perks over time.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20stake" target="_blank">Stake</a>
+              <span class="text-xs text-slate-400">APY offers</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="shiny-card" data-key="marketplace" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(250,204,21,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-amber-300">Marketplace (Sell Services)</h3>
+            <p class="mt-2 text-sm text-slate-200">Sell digital services, gigs and products to your network — collect payments on platform.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20sell%20on%20marketplace" target="_blank">List Service</a>
+              <span class="text-xs text-slate-400">Seller tools</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="shiny-card" data-key="nft" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(130,80,255,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-indigo-300">NFT Drops & Royalties</h3>
+            <p class="mt-2 text-sm text-slate-200">Create limited NFT drops, sell to collectors and earn secondary royalties.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20launch%20an%20NFT" target="_blank">Launch Drop</a>
+              <span class="text-xs text-slate-400">Royalties</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="shiny-card" data-key="ai" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(124,58,237,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-violet-300">AI Services</h3>
+            <p class="mt-2 text-sm text-slate-200">Offer AI chatbots, content generators, and tools to clients and charge per use.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20offer%20AI%20services" target="_blank">List Service</a>
+              <span class="text-xs text-slate-400">Tools & APIs</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="shiny-card" data-key="content" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(96,165,250,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-sky-300">Content Creation</h3>
+            <p class="mt-2 text-sm text-slate-200">Publish guides, videos and posts — earn ad share, tips and revenue splits.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20publish%20content" target="_blank">Publish</a>
+              <span class="text-xs text-slate-400">Revenue share</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="shiny-card" data-key="writing" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(255,159,67,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-orange-300">Writing & Microtasks</h3>
+            <p class="mt-2 text-sm text-slate-200">Complete short tasks, writing jobs and micro-gigs to earn quick credits.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20microtasks" target="_blank">Start Tasks</a>
+              <span class="text-xs text-slate-400">Quick payouts</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 13 -->
+        <article class="shiny-card" data-key="surveys" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(79,70,229,0.04), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-indigo-300">Surveys & Offers</h3>
+            <p class="mt-2 text-sm text-slate-200">Complete market surveys and partner offers to accumulate credits and vouchers.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20do%20surveys" target="_blank">Do Surveys</a>
+              <span class="text-xs text-slate-400">Rewards</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 14 -->
+        <article class="shiny-card" data-key="gifts" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(236,72,153,0.03), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-pink-300">Gift Cards & Rewards</h3>
+            <p class="mt-2 text-sm text-slate-200">Exchange credits for gift cards, mobile money vouchers and discounts.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20gift%20cards" target="_blank">Redeem</a>
+              <span class="text-xs text-slate-400">Instant redeem</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 15 -->
+        <article class="shiny-card" data-key="affiliate2" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(59,130,246,0.03), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-blue-300">Affiliate Marketplaces</h3>
+            <p class="mt-2 text-sm text-slate-200">Promote third-party offers from our marketplace and earn commission on conversions.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20join%20affiliate%20marketplace" target="_blank">Join Marketplace</a>
+              <span class="text-xs text-slate-400">Affiliate deals</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 16 -->
+        <article class="shiny-card" data-key="freelance" role="button" tabindex="0" aria-pressed="false"
+                 style="--cardbg: linear-gradient(180deg, rgba(16,185,129,0.03), rgba(255,255,255,0.01));">
+          <div class="content">
+            <h3 class="font-bold text-lg text-emerald-300">Freelance Gigs</h3>
+            <p class="mt-2 text-sm text-slate-200">Offer freelance work on the platform — hire, get hired and manage contracts safely.</p>
+            <div class="meta">
+              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20freelance%20gigs" target="_blank">Offer Gigs</a>
+              <span class="text-xs text-slate-400">Secure contracts</span>
+            </div>
+          </div>
+        </article>
+
       </div>
+
+      <p class="mt-4 text-xs text-slate-400">Tap cards to pick interests (multi-select). Selections are saved locally; enable notifications to receive personalized alerts about chosen ways of earning.</p>
     </section>
 
-    <!-- Professional joiners -->
+    <!-- Real-time joiners -->
     <section id="join" class="mt-16">
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-bold">Real-time Joiners</h2>
-        <div class="text-sm text-slate-400">Showing latest members from across the globe</div>
+        <div class="text-sm text-slate-400">Showing latest members</div>
       </div>
 
       <div class="mt-4 grid md:grid-cols-2 gap-4">
@@ -286,7 +411,7 @@
         <div class="glass rounded-2xl p-4 flex flex-col gap-3">
           <div class="font-semibold">Members Online</div>
           <div id="onlineList" class="flex gap-3 flex-wrap"></div>
-          <div class="mt-2 text-xs text-slate-400">Active dot shows current online presence. Timestamps are updated live.</div>
+          <div class="mt-2 text-xs text-slate-400">Active dot shows current presence. Timestamps update live.</div>
         </div>
       </div>
     </section>
@@ -310,243 +435,247 @@
     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.92 11.92 0 0 0 12.05 0C5.4 0 .03 5.36.03 12a11.9 11.9 0 0 0 1.63 6L0 24l6.16-1.61A11.95 11.95 0 0 0 12 24h.01c6.64 0 12.02-5.36 12.02-12.01 0-3.21-1.25-6.23-3.51-8.51Zm-8.5 19.05h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.2-3.65.96.98-3.56-.24-.37a9.9 9.9 0 0 1-1.51-5.26c0-5.46 4.45-9.9 9.93-9.9 2.65 0 5.15 1.03 7.02 2.9a9.8 9.8 0 0 1 2.9 7c0 5.47-4.46 9.91-10 9.91Zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17-.35.22-.64.07c-.3-.15-1.26-.46-2.4-1.47-.89-.78-1.48-1.74-1.65-2.03-.17-.3-.02-.46.13-.61.14-.14.3-.37.45-.56.15-.19.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.03 1-1.03 2.46s1.06 2.86 1.2 3.06c.15.2 2.08 3.18 5.04 4.45.7.3 1.24.48 1.66.62.7.22 1.34.19 1.85.12.56-.08 1.76-.72 2.01-1.41.25-.7.25-1.3.17-1.41-.08-.12-.27-.2-.57-.35Z"/></svg>
   </a>
 
-  <!-- Confetti container & congrats pill -->
+  <!-- Confetti + congrats + hand pointer -->
   <div id="confettiWrap" aria-hidden="true"></div>
-  <div id="congrats" class="congratsPill" style="display:none">Congratulations 🎊</div>
+  <div id="congrats" class="congratsPill">Congratulations 🎊</div>
 
-  <!-- Hand pointer (animated SVG) -->
   <div id="handPointer" aria-hidden="true">
-    <svg viewBox="0 0 64 64" width="64" height="64" class="hand">
+    <svg viewBox="0 0 64 64" width="64" height="64">
       <g fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 36v-8a6 6 0 0 1 12 0v6" stroke="#fff" />
-        <path d="M32 34v-10a6 6 0 0 1 12 0v3" stroke="#fff"/>
-        <path d="M12 42c0 6 8 10 20 10s20-4 20-10v-6a6 6 0 0 0-6-6h-2" stroke="#fff" />
-        <path d="M12 42l4-12 10-6 8 2" stroke="#fff"/>
+        <path d="M20 36v-8a6 6 0 0 1 12 0v6" />
+        <path d="M32 34v-10a6 6 0 0 1 12 0v3" />
+        <path d="M12 42c0 6 8 10 20 10s20-4 20-10v-6a6 6 0 0 0-6-6h-2" />
+        <path d="M12 42l4-12 10-6 8 2" />
       </g>
     </svg>
   </div>
 
   <!-- Toast -->
-  <div id="toast" style="position:fixed;left:50%;transform:translateX(-50%);bottom:48px;background:#0b1220;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);display:none;z-index:1000;color:#e6eef8"></div>
+  <div id="toast" style="position:fixed;left:50%;transform:translateX(-50%);bottom:48px;background:#071224;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);display:none;z-index:1000;color:#e6eef8"></div>
 
   <script>
-    /************************************************************
-     * Updated for PushEngage (PushEngage snippet is in the head)
-     * - notifyBtn now triggers PushEngage.subscribe
-     * - improved countdown is inside hero
-     * - removed OneSignal code (no conflicts)
-     ************************************************************/
+    /* ----------------------------
+      Helpers & UI behavior
+       - Countdown (hero + mini)
+       - PushEngage subscribe on Press Here
+       - Multi-select pads saved per-key in localStorage
+       - Confetti + congrats when clicking CTAs
+       - Hand pointer nudge
+       - Service worker registration (best-effort)
+    -----------------------------*/
 
-    // Helper: small toast
-    function showToast(msg, ms = 3500) {
+    // small toast
+    function showToast(msg, ms = 3200) {
       const t = document.getElementById('toast');
+      if(!t) return;
       t.textContent = msg;
       t.style.display = 'block';
       clearTimeout(t._hid);
       t._hid = setTimeout(()=> t.style.display = 'none', ms);
     }
 
-    // Typing
-    const typeEl = document.getElementById('type');
-    const phrases = ['Online Business Platform','Set New Records in Networking 🎊','HELALINK Agencies dropping soon ♦️','Launch: 13 Sep 2025 • 2PM EAT'];
-    let pi=0, ci=0, deleting=false;
-    function tick(){ const full=phrases[pi]; if(!deleting) ci++; else ci--; typeEl.textContent=full.slice(0,ci); if(!deleting && ci===full.length){deleting=true; setTimeout(tick,1200); return} if(deleting && ci===0){deleting=false; pi=(pi+1)%phrases.length} setTimeout(tick, deleting?40:70);} tick();
+    // Typewriter (tagline)
+    (function(){
+      const el = document.getElementById('type');
+      const words = ['Launch • Network • Earn','New ways to profit','HELALINK Agencies dropping soon','Launch: 13 Sep 2025 • 2PM EAT'];
+      let wi=0, ci=0, fwd=true;
+      function step(){
+        const w = words[wi];
+        el.textContent = w.slice(0,ci);
+        if(fwd){ ci++; if(ci> w.length){ fwd=false; setTimeout(step,1200); return } }
+        else { ci--; if(ci<0){ fwd=true; wi=(wi+1)%words.length } }
+        setTimeout(step, fwd?70:36);
+      }
+      step();
+    })();
 
-    // Countdown (hero)
-    const cd = document.getElementById('countdown');
-    const launchDate = new Date('2025-09-13T11:00:00Z'); // 14:00 EAT
-    function updateCountdown(){ const now=new Date(); let diff=Math.max(0, launchDate - now); const d=Math.floor(diff/86400000); diff -= d*86400000; const h=Math.floor(diff/3600000); diff -= h*3600000; const m=Math.floor(diff/60000); diff -= m*60000; const s=Math.floor(diff/1000); cd.textContent = `${d}d ${h}h ${m}m ${s}s`; }
-    updateCountdown(); setInterval(updateCountdown,1000);
+    // Countdown (hero + mini)
+    (function(){
+      const launch = new Date('2025-09-13T11:00:00Z'); // 2:00 PM EAT
+      const cdDays = document.getElementById('cdDays'),
+            cdHours = document.getElementById('cdHours'),
+            cdMinutes = document.getElementById('cdMinutes'),
+            cdSeconds = document.getElementById('cdSeconds'),
+            notifyMini = document.getElementById('notifyMini');
 
-    // Simulated joiners (unchanged)
-    const professionalFeed = document.getElementById('professionalFeed');
-    const onlineList = document.getElementById('onlineList');
-    const names = ['Amina','Jayden','Fatma','Olu','Grace','Rashid','Ivy','Zara','Kofi','Liam','Tariq','Mira','Noah','Leah','Kwame','Nadia','Yusuf','Aaliyah'];
-    const countries = [{c:'Kenya',f:'🇰🇪'},{c:'Tanzania',f:'🇹🇿'},{c:'Uganda',f:'🇺🇬'},{c:'Nigeria',f:'🇳🇬'},{c:'Ghana',f:'🇬🇭'},{c:'Rwanda',f:'🇷🇼'},{c:'Ethiopia',f:'🇪🇹'},{c:'South Africa',f:'🇿🇦'},{c:'Egypt',f:'🇪🇬'},{c:'UAE',f:'🇦🇪'},{c:'India',f:'🇮🇳'}];
-    function avatar(seed){ return `https://api.dicebear.com/8.x/thumbs/svg?seed=${encodeURIComponent(seed)}&backgroundType=gradientLinear&radius=50`; }
-    function timeAgo(date){ const s=Math.floor((Date.now()-date)/1000); if(s<5) return 'just now'; if(s<60) return `${s}s ago`; const m=Math.floor(s/60); if(m<60) return `${m}m ago`; const h=Math.floor(m/60); return `${h}h ago`; }
-    function createProfessionalEntry({name,country,flag,joined}) {
-      const wrapper = document.createElement('div'); wrapper.className='joiner-card flex gap-3 items-start';
-      wrapper.innerHTML = `
-        <img src="${avatar(name+country)}" alt="${name}" class="w-12 h-12 rounded-full" />
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center justify-between">
-            <div class="truncate">
-              <div class="font-semibold">${name}</div>
-              <div class="text-xs text-slate-400">${flag} ${country} • New member</div>
+      function pad(n){ return String(n).padStart(2,'0') }
+      function update(){
+        const now = new Date();
+        let diff = Math.max(0, launch - now);
+        const d = Math.floor(diff / 86400000); diff -= d*86400000;
+        const h = Math.floor(diff / 3600000); diff -= h*3600000;
+        const m = Math.floor(diff / 60000); diff -= m*60000;
+        const s = Math.floor(diff / 1000);
+        if(cdDays) cdDays.textContent = pad(d);
+        if(cdHours) cdHours.textContent = pad(h);
+        if(cdMinutes) cdMinutes.textContent = pad(m);
+        if(cdSeconds) cdSeconds.textContent = pad(s);
+        if(notifyMini){
+          notifyMini.textContent = (launch - now <= 0) ? 'LAUNCHED' : (d + 'd ' + pad(h) + 'h');
+        }
+      }
+      update(); setInterval(update, 1000);
+    })();
+
+    // Simulated "real-time" joiners (local only)
+    (function(){
+      const professionalFeed = document.getElementById('professionalFeed');
+      const onlineList = document.getElementById('onlineList');
+      if(!professionalFeed || !onlineList) return;
+      const names = ['Amina','Jayden','Fatma','Olu','Grace','Rashid','Ivy','Zara','Kofi','Liam','Tariq','Mira','Noah','Leah','Kwame','Nadia','Yusuf','Aaliyah'];
+      const countries = [{c:'Kenya',f:'🇰🇪'},{c:'Tanzania',f:'🇹🇿'},{c:'Uganda',f:'🇺🇬'},{c:'Nigeria',f:'🇳🇬'},{c:'Ghana',f:'🇬🇭'},{c:'Rwanda',f:'🇷🇼'},{c:'Ethiopia',f:'🇪🇹'},{c:'South Africa',f:'🇿🇦'},{c:'Egypt',f:'🇪🇬'},{c:'UAE',f:'🇦🇪'},{c:'India',f:'🇮🇳'}];
+      function avatar(seed){ return `https://api.dicebear.com/8.x/thumbs/svg?seed=${encodeURIComponent(seed)}&backgroundType=gradientLinear&radius=50`; }
+      function timeAgo(date){ const s=Math.floor((Date.now()-date)/1000); if(s<5) return 'just now'; if(s<60) return `${s}s ago`; const m=Math.floor(s/60); if(m<60) return `${m}m ago`; const h=Math.floor(m/60); return `${h}h ago`; }
+      function createEntry(n, cc, joined){
+        const wrap = document.createElement('div'); wrap.className='joiner-card flex gap-3 items-start';
+        wrap.innerHTML = `
+          <img src="${avatar(n+cc.c)}" alt="${n}" class="w-12 h-12 rounded-full" />
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <div class="truncate">
+                <div class="font-semibold">${n}</div>
+                <div class="text-xs text-slate-400">${cc.f} ${cc.c} • New member</div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs text-slate-400">${timeAgo(joined)}</div>
+                <div class="dot-pulse mt-2"><span class="active-dot" style="display:inline-block;width:10px;height:10px;border-radius:999px;background:#22c55e"></span></div>
+              </div>
             </div>
-            <div class="text-right">
-              <div class="text-xs text-slate-400">${timeAgo(joined)}</div>
-              <div class="dot-pulse mt-2"><span class="active-dot" style="display:inline-block;width:10px;height:10px;border-radius:999px;background:#22c55e"></span></div>
-            </div>
+            <div class="mt-2 text-xs text-slate-400">Joined via WhatsApp • ${new Date(joined).toLocaleString()}</div>
           </div>
-          <div class="mt-2 text-xs text-slate-400">Joined via WhatsApp • ${new Date(joined).toLocaleString()}</div>
-        </div>
-      `;
-      return wrapper;
-    }
-    function addLocalProfessional(){
-      const name = names[Math.floor(Math.random()*names.length)];
-      const cc = countries[Math.floor(Math.random()*countries.length)];
-      const joined = Date.now();
-      const entry = createProfessionalEntry({name,country:cc.c,flag:cc.f,joined});
-      professionalFeed.prepend(entry);
-      while(professionalFeed.children.length>8) professionalFeed.lastElementChild.remove();
+        `;
+        return wrap;
+      }
+      function pushOne(){
+        const n = names[Math.floor(Math.random()*names.length)];
+        const cc = countries[Math.floor(Math.random()*countries.length)];
+        const j = Date.now();
+        professionalFeed.prepend(createEntry(n,cc,j));
+        while(professionalFeed.children.length>8) professionalFeed.lastElementChild.remove();
+        const chip = document.createElement('div'); chip.className='flex items-center gap-2 p-1 rounded-full bg-white/3'; chip.innerHTML = `<img src="${avatar(n+cc.c)}" class="w-8 h-8 rounded-full"/><div class="text-xs font-medium">${n}</div>`;
+        onlineList.prepend(chip);
+        while(onlineList.children.length>12) onlineList.lastElementChild.remove();
+      }
+      for(let i=0;i<4;i++) pushOne();
+      setInterval(pushOne, 4200 + Math.random()*3000);
+    })();
 
-      const onlineChip = document.createElement('div'); onlineChip.className='flex items-center gap-2 p-1 rounded-full bg-white/3';
-      onlineChip.innerHTML = `<img src="${avatar(name+cc.c)}" class="w-8 h-8 rounded-full"/><div class="text-xs font-medium">${name}</div>`;
-      onlineList.prepend(onlineChip);
-      while(onlineList.children.length>12) onlineList.lastElementChild.remove();
-    }
-    for(let i=0;i<5;i++){ addLocalProfessional(); }
-    setInterval(addLocalProfessional, 4200 + Math.random()*3000);
-
-    // Cards selection (no server tags - save locally)
-    const cardList = Array.from(document.querySelectorAll('.shiny-card[data-key]'));
-    let selectedKey = localStorage.getItem('hl_selected_key') || null;
-
-    function deselectAll() {
-      cardList.forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
-      selectedKey = null;
-      localStorage.removeItem('hl_selected_key');
-      showToast('Interest cleared.');
-    }
-
-    function selectCard(card) {
-      deselectAll();
-      card.classList.add('selected');
-      card.setAttribute('aria-pressed','true');
-      const key = card.getAttribute('data-key');
-      selectedKey = key;
-      localStorage.setItem('hl_selected_key', key);
-      showToast('Interest saved locally. Enable notifications to receive targeted messages.');
-    }
-
-    cardList.forEach(card => {
-      card.addEventListener('click', (e) => {
-        if ((e.target.tagName||'').toLowerCase() === 'a') return;
-        selectCard(card);
+    // Cards: multi-select, persisted
+    (function(){
+      const cards = Array.from(document.querySelectorAll('.shiny-card[data-key]'));
+      if(!cards.length) return;
+      cards.forEach(card=>{
+        const key = card.dataset.key;
+        // restore
+        try{
+          if(localStorage.getItem('hl_sel_'+key) === '1'){ card.classList.add('selected'); card.setAttribute('aria-pressed','true'); }
+        }catch(e){}
+        function toggle(){
+          const active = card.classList.toggle('selected');
+          card.setAttribute('aria-pressed', active ? 'true' : 'false');
+          try{ localStorage.setItem('hl_sel_'+key, active ? '1' : '0'); }catch(e){}
+          showToast(active ? 'Interest saved locally.' : 'Interest removed.');
+        }
+        card.addEventListener('click', (e)=>{ if((e.target||{}).tagName === 'A') return; toggle(); });
+        card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); } });
       });
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCard(card); }
-      });
-    });
+    })();
 
-    if (selectedKey) {
-      const el = document.querySelector(`.shiny-card[data-key="${selectedKey}"]`);
-      if (el) setTimeout(()=> selectCard(el), 200);
-    }
-
-    // CONFETTI + congrats burst + hand pointer logic
-    const confettiWrap = document.getElementById('confettiWrap');
-    const congrats = document.getElementById('congrats');
-    const hand = document.getElementById('handPointer');
-    const notifyBtn = document.getElementById('notifyBtn');
-
-    function fireConfetti(x = window.innerWidth/2, y = window.innerHeight/2) {
-      const colors = ['#ff7ab6','#ffcd5c','#7ef080','#66e0ff','#9b7bff','#ffd97a','#ff9fce'];
-      const count = 28;
-      for (let i=0;i<count;i++){
-        const el = document.createElement('div');
-        el.className = 'confetti';
+    // confetti + congrats + hand pointer helper
+    function fireConfetti(x = window.innerWidth/2, y = window.innerHeight/2, count = 20){
+      const wrap = document.getElementById('confettiWrap'); const congrats = document.getElementById('congrats');
+      const colors = ['#ff7ab6','#ffd86f','#7ef080','#66e0ff','#b899ff','#ffd97a','#ff9fce'];
+      for(let i=0;i<count;i++){
+        const el = document.createElement('div'); el.className='confetti';
         el.style.background = colors[Math.floor(Math.random()*colors.length)];
-        const sx = x + (Math.random()*40 - 20);
-        const sy = y + (Math.random()*10 - 10);
-        el.style.left = (sx) + 'px';
-        el.style.top = (sy) + 'px';
-        el.style.width = (6 + Math.random()*10) + 'px';
-        el.style.height = (10 + Math.random()*14) + 'px';
+        el.style.left = (x + (Math.random()*80 - 40)) + 'px';
+        el.style.top = (y + (Math.random()*40 - 20)) + 'px';
+        el.style.width = (6 + Math.random()*8) + 'px';
+        el.style.height = (10 + Math.random()*12) + 'px';
         el.style.opacity = 1;
         el.style.animationDuration = (1200 + Math.random()*700) + 'ms';
-        confettiWrap.appendChild(el);
-        setTimeout(()=> { el.remove(); }, 2200);
+        wrap.appendChild(el);
+        setTimeout(()=> el.remove(), 2200);
       }
-      congrats.style.display = 'block';
-      congrats.style.opacity = '1';
-      clearTimeout(congrats._hid);
-      congrats._hid = setTimeout(()=> { congrats.style.opacity='0'; setTimeout(()=> congrats.style.display='none', 400); }, 1800);
+      if(congrats){
+        congrats.style.display='block';
+        setTimeout(()=> congrats.style.display='none', 1700);
+      }
+    }
+    function showHandNear(element){
+      const hp = document.getElementById('handPointer'); if(!hp || !element) return;
+      const r = element.getBoundingClientRect();
+      const rightOffset = Math.max(12, window.innerWidth - (r.right + 12));
+      const bottomOffset = Math.max(96, window.innerHeight - (r.top) + 6);
+      hp.style.right = rightOffset + 'px';
+      hp.style.bottom = bottomOffset + 'px';
+      hp.style.opacity = '1';
+      clearTimeout(hp._hid); hp._hid = setTimeout(()=> hp.style.opacity = '0', 2400);
     }
 
-    function showHandPointer() {
-      if (!notifyBtn) return;
-      const r = notifyBtn.getBoundingClientRect();
-      hand.style.right = Math.max(12, window.innerWidth - (r.right + 12)) + 'px';
-      hand.style.bottom = Math.max(96, window.innerHeight - (r.top) + 6) + 'px';
-      hand.style.opacity = '1';
-      clearTimeout(hand._hid);
-      hand._hid = setTimeout(()=> { hand.style.opacity = '0'; }, 2400);
-    }
+    // small global celebration on CTA clicks
+    document.addEventListener('click', (e)=>{
+      const t = e.target.closest('a, button');
+      if(!t) return;
+      const cx = e.clientX || window.innerWidth/2;
+      const cy = e.clientY || window.innerHeight/2;
+      fireConfetti(cx, cy, 12);
+      if(t.id === 'notifyBtn') showHandNear(t);
+      else showHandNear(document.getElementById('notifyBtn'));
+    }, {passive:true});
 
-    // Global click listener for buttons & links — trigger confetti & hand pointer
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('button, a');
-      if (!btn) return;
-      const cx = e.clientX || (window.innerWidth/2);
-      const cy = e.clientY || (window.innerHeight/2);
-      fireConfetti(cx, cy);
-      showHandPointer();
-    }, { passive: true });
+    // service worker registration (best-effort)
+    (function(){
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/pushengage-sw.js').then(r=>console.log('SW registered', r.scope)).catch(e=>console.warn('SW not registered', e));
+      }
+    })();
 
-    notifyBtn && notifyBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); notifyBtn.click(); }
-    });
+    // Notify button -> PushEngage.subscribe (safe wait)
+    (function(){
+      const btn = document.getElementById('notifyBtn');
+      if(!btn) return;
+      btn.addEventListener('click', async ()=>{
+        try{
+          // wait for PushEngage SDK to be available (short timeout)
+          const ready = await new Promise((resolve)=>{
+            let waited = 0; const max = 8000;
+            const iv = setInterval(()=> {
+              if(window.PushEngage && typeof window.PushEngage.push === 'function'){ clearInterval(iv); resolve(true); }
+              waited += 200;
+              if(waited >= max){ clearInterval(iv); resolve(false); }
+            },200);
+          });
+          if(!ready){ showToast('Notifications loading — try again in a moment.'); showHandNear(btn); return; }
 
-    // Register the service worker (best-effort; PushEngage also loads its own)
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/pushengage-sw.js').then(reg => {
-        console.log('pushengage-sw registered', reg.scope);
-      }).catch(err => {
-        console.warn('Service worker register failed (if missing, ensure pushengage-sw.js at site root):', err);
-      });
-    }
-
-    // notifyBtn flow for PushEngage
-    document.getElementById('notifyBtn').addEventListener('click', async () => {
-      try {
-        // Ensure the PushEngage SDK has loaded
-        const waitForPushEngage = () => new Promise((resolve) => {
-          let waited = 0; const max = 8000;
-          const iv = setInterval(()=> {
-            if (window.PushEngage && typeof window.PushEngage.push === 'function') { clearInterval(iv); resolve(true); }
-            waited += 200;
-            if (waited >= max) { clearInterval(iv); resolve(false); }
-          }, 200);
-        });
-        const ready = await waitForPushEngage();
-        if (!ready) {
-          showToast('Notification system still loading. Try again in a moment.');
-          return;
-        }
-
-        // Call PushEngage subscribe
-        try {
-          // This is the recommended push action; PushEngage shows its own modal/native prompt.
-          PushEngage.push(['subscribe']);
-          // After pressing subscribe, the browser will prompt. We can't reliably know result instantly,
-          // so instruct user to allow the browser notification permission if prompted.
-          showToast('If you allowed notifications, you are now subscribed ✅');
-        } catch (err) {
-          console.warn('PushEngage subscribe failed', err);
-          // Fallback: try standard Notification API
-          const p = await Notification.requestPermission();
-          if (p === 'granted') {
-            showToast('Notifications enabled via browser permission ✅');
-          } else {
-            showToast('Permission denied or blocked.');
+          try{
+            PushEngage.push(['subscribe']); // uses your PushEngage SDK as provided
+            showToast('If you allowed notifications, you are now subscribed ✅');
+            // small confetti near button
+            const r = btn.getBoundingClientRect();
+            fireConfetti(r.left + r.width/2, r.top + r.height/2, 20);
+          }catch(err){
+            console.warn('PushEngage subscribe failed', err);
+            if(window.Notification && Notification.requestPermission){
+              const p = await Notification.requestPermission();
+              if(p === 'granted') showToast('Notifications enabled via browser permission ✅'); else showToast('Permission denied or blocked.');
+            } else {
+              showToast('Unable to enable notifications in this browser.');
+            }
           }
+        }catch(e){
+          console.error(e);
+          showToast('Something went wrong — check console.');
         }
-      } catch (err) {
-        console.error('notifyBtn error', err);
-        showToast('Something went wrong. See console for details.');
-      }
-    });
+      });
+      // keyboard support
+      btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); btn.click(); }});
+    })();
 
-    // Accessibility: keyboard tabbing
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Tab') document.body.classList.add('user-tabbing');
-    });
+    // accessibility: show focus outlines on Tab
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Tab') document.body.classList.add('user-tabbing'); });
 
-    console.log('HELALINK page loaded — PushEngage integrated, countdown moved into hero.');
+    console.log('HELALINK updated UI loaded — all ways-of-earning added, each in its own pad with distinct colors.');
   </script>
 </body>
 </html>
