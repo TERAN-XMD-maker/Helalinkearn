@@ -167,6 +167,7 @@
       </svg>
 
       <div class="grid md:grid-cols-3 gap-4" id="earnGrid">
+        <!-- Cards (1..10) - same as you provided -->
         <!-- Card 1 - Affiliate -->
         <article class="shiny-card" data-key="affiliate" role="button" tabindex="0" aria-pressed="false" style="--g: conic-gradient(#ff7ab6, #ffcd5c, #7ef080, #66e0ff, #9b7bff);">
           <div class="flex items-start justify-between">
@@ -323,13 +324,10 @@
      * Full JS: touch-detection (hides glow), stable card behavior,
      * OneSignal robust init + prompt + subscription sync.
      *
-     * Important Service Worker notes (if notifications still don't show):
-     * - Your site must be HTTPS (or localhost).
-     * - Place these two files at your site root:
-     *   /OneSignalSDKWorker.js
-     *   /OneSignalSDKUpdaterWorker.js
-     *   Both should contain: importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.worker.js');
-     * - Ensure no adblocker blocks onesignal.com or the worker scripts.
+     * NOTE: Put OneSignal service workers at your site root:
+     * /OneSignalSDKWorker.js
+     * /OneSignalSDKUpdaterWorker.js
+     * Both should contain: importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.worker.js');
      *****************************************************************/
 
     /* ---------- touch detection: adds html.hasTouch to hide animated ::before glow on touch devices ---------- */
@@ -463,42 +461,36 @@
     window.addEventListener('resize', () => { if (!selectedKey) return; const el = document.querySelector(`.shiny-card[data-key="${selectedKey}"]`); if (el) drawSeparatorStatic(el); }, { passive: true });
     window.addEventListener('scroll', () => { if (!selectedKey) return; const el = document.querySelector(`.shiny-card[data-key="${selectedKey}"]`); if (el) drawSeparatorStatic(el); }, { passive: true });
 
-    /* ---------- OneSignal robust initialization & prompt flow ---------- */
+    /* ---------- OneSignal robust initialization & prompt flow (improved) ---------- */
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function() {
       try {
         OneSignal.init({
           appId: "cd687662-396c-413c-a462-dfb8c5890352",
           allowLocalhostAsSecureOrigin: true,
-          welcomeNotification: { title: "HELALINK", message: "Thanks for enabling HELALINK notifications!" }
+          welcomeNotification: { title: "HELALINK", message: "Thanks for enabling HELALINK notifications!" },
+          notifyButton: { enable: false }
         });
         console.log('[OneSignal] init called');
       } catch(e) { console.warn('[OneSignal] init error', e); }
     });
 
-    function waitForOneSignalInstance(timeout = 8000) {
-      return new Promise((resolve) => {
-        const start = Date.now();
-        (function check() {
-          if (window.OneSignal && OneSignal.push) return resolve(OneSignal);
-          if (Date.now() - start > timeout) return resolve(null);
-          setTimeout(check, 200);
-        })();
-      });
+    // helper to detect presence of OneSignal API methods (and fallback gracefully)
+    function oneSignalAvailable() {
+      return !!(window.OneSignal && OneSignal.push);
     }
 
     async function isSubscribed() {
       try {
-        const OneSig = await waitForOneSignalInstance(4000);
-        if (!OneSig) { console.warn('[OneSignal] not available when checking subscription'); return false; }
+        if (!oneSignalAvailable()) return false;
         return await new Promise(resolve => {
-          OneSig.push(async function() {
+          OneSignal.push(async function() {
             try {
-              if (typeof OneSig.isPushNotificationsEnabled === 'function') {
-                const enabled = await OneSig.isPushNotificationsEnabled();
+              if (typeof OneSignal.isPushNotificationsEnabled === 'function') {
+                const enabled = await OneSignal.isPushNotificationsEnabled();
                 resolve(!!enabled);
-              } else if (typeof OneSig.getUserId === 'function') {
-                const id = await OneSig.getUserId();
+              } else if (typeof OneSignal.getUserId === 'function') {
+                const id = await OneSignal.getUserId();
                 resolve(!!id);
               } else resolve(false);
             } catch (err) { console.warn('[OneSignal] check error', err); resolve(false); }
@@ -508,28 +500,30 @@
     }
 
     async function promptForNotifications() {
-      const OneSig = await waitForOneSignalInstance(8000);
       const isTouch = (/Mobi|Android|iPhone|iPad|iPod/).test(navigator.userAgent) || window.innerWidth < 768;
 
-      if (!OneSig) {
+      if (!oneSignalAvailable()) {
         showToast('Notification SDK not loaded — requesting browser permission as fallback...');
         try { const p = await Notification.requestPermission(); return p === 'granted'; } catch(e){ console.warn('Notification.requestPermission fallback failed', e); return false; }
       }
 
       return await new Promise(resolve => {
-        OneSig.push(async function() {
+        OneSignal.push(async function() {
           try {
-            if (isTouch && typeof OneSig.showNativePrompt === 'function') {
-              await OneSig.showNativePrompt();
-            } else if (!isTouch && typeof OneSig.showSlidedownPrompt === 'function') {
-              await OneSig.showSlidedownPrompt();
-            } else if (typeof OneSig.registerForPushNotifications === 'function') {
-              await OneSig.registerForPushNotifications();
+            // prefer native prompts on mobile, slidedown on desktop if available
+            if (isTouch && typeof OneSignal.showNativePrompt === 'function') {
+              await OneSignal.showNativePrompt();
+            } else if (!isTouch && typeof OneSignal.showSlidedownPrompt === 'function') {
+              await OneSignal.showSlidedownPrompt();
+            } else if (typeof OneSignal.registerForPushNotifications === 'function') {
+              await OneSignal.registerForPushNotifications();
             } else {
+              // fallback to browser permission
               const p = await Notification.requestPermission();
               if (p !== 'granted') { resolve(false); return; }
             }
 
+            // small delay then check status
             setTimeout(async () => { const enabled = await isSubscribed(); resolve(enabled); }, 700);
           } catch (err) {
             console.warn('[OneSignal] prompt error', err);
