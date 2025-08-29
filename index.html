@@ -34,7 +34,7 @@
     @keyframes move2{from{transform:translateX(0) translateY(0)}to{transform:translateX(-900px) translateY(-250px)}}
     @keyframes move3{from{transform:translateX(0) translateY(0)}to{transform:translateX(-600px) translateY(-120px)}}
 
-    /* Shiny colorful animated border (per-card via CSS variable --g) */
+    /* Shiny colorful cards (static border removed to prevent moving rectangular lines) */
     .shiny-card {
       position: relative;
       border-radius: 14px;
@@ -47,22 +47,7 @@
       min-height:94px;
     }
     .shiny-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,.75) }
-    /* outer animated border */
-    .shiny-card::after{
-      content: "";
-      position: absolute;
-      inset: -3px;
-      border-radius: 16px;
-      padding: 3px;
-      background: var(--g, conic-gradient(#ff0066,#ffcc00,#33ff00,#00ccff,#7a00ff));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      animation: borderSpin 6s linear infinite;
-      z-index: 0;
-      pointer-events:none;
-    }
-    @keyframes borderSpin { to { transform: rotate(360deg); } }
+    /* NOTE: Removed animated ::after border to eliminate moving rectangular lines; cards keep their colored backgrounds per-card via --cardbg */
 
     .shiny-card .content { position:relative; z-index: 1; }
     .shiny-card.selected { box-shadow: 0 22px 44px rgba(99,102,241,0.12); transform: translateY(-8px) scale(1.02); z-index: 40; }
@@ -205,7 +190,7 @@
       <div class="grid gap-4 grid-cols-responsive md:grid-cols-3" id="earnGrid" style="display:grid;grid-template-columns:repeat(1,1fr);">
         <!-- Card 1 - Affiliate (green-ish bg) -->
         <article class="shiny-card" data-key="affiliate" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#7ef080,#66e0ff,#9b7bff); --cardbg: linear-gradient(180deg, rgba(26,209,132,0.06), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(26,209,132,0.06), rgba(255,255,255,0.01));">
           <div class="content">
             <div class="flex items-start justify-between">
               <div>
@@ -222,9 +207,11 @@
           </div>
         </article>
 
+        <!-- ... other cards unchanged but each keeps its own --cardbg to show colored sections ... -->
+
         <!-- Card 2 - Videos (peach) -->
         <article class="shiny-card" data-key="videos" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffd2a6,#ff9fce,#a7c7ff); --cardbg: linear-gradient(180deg, rgba(255,208,166,0.04), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,208,166,0.04), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-amber-300">2. Watch Sponsored Videos</h3>
             <p class="mt-2 text-sm text-slate-200">Watch short sponsored YouTube and TikTok videos, validate the views, and receive credits. Credits convert to cash or platform features like roulette.</p>
@@ -237,7 +224,7 @@
 
         <!-- Card 3 - Roulette (pink/purple) -->
         <article class="shiny-card" data-key="roulette" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ff9f9f,#ffd97a,#c6ffb3); --cardbg: linear-gradient(180deg, rgba(255,159,159,0.04), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,159,159,0.04), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-pink-300">3. Roulette Casino Spin</h3>
             <p class="mt-2 text-sm text-slate-200">Use earned credits to play the roulette. Win prizes, bonuses, and multipliers. Responsible play is enforced.</p>
@@ -250,7 +237,7 @@
 
         <!-- Card 4 - Games (lavender) -->
         <article class="shiny-card" data-key="games" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffd6f0,#fce7a9,#d6ffcf); --cardbg: linear-gradient(180deg, rgba(255,214,240,0.03), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,214,240,0.03), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-violet-300">4. Online Games (Chess & Draught)</h3>
             <p class="mt-2 text-sm text-slate-200">Compete in skill-based games with entry fees and prize pools. Join tournaments and climb leaderboards.</p>
@@ -263,7 +250,7 @@
 
         <!-- Card 5 - Ads (mint) -->
         <article class="shiny-card" data-key="ads" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffef9f,#bff5d0,#c9f0ff); --cardbg: linear-gradient(180deg, rgba(255,239,159,0.03), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,239,159,0.03), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-lime-300">5. Advertisement Clicks</h3>
             <p class="mt-2 text-sm text-slate-200">Interact with vetted advertisers and earn for validated clicks. Ads are quality-checked and limited per user to ensure fair payouts.</p>
@@ -276,7 +263,7 @@
 
         <!-- Card 6 - Forex (soft yellow) -->
         <article class="shiny-card" data-key="forex" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffd4e0,#ffefb3,#d5ffd8); --cardbg: linear-gradient(180deg, rgba(255,239,179,0.03), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,239,179,0.03), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-yellow-300">6. Forex Trading</h3>
             <p class="mt-2 text-sm text-slate-200">Access educational resources, demo accounts and partner brokers. Trade forex with optional managed accounts.</p>
@@ -289,7 +276,7 @@
 
         <!-- Card 7 - AI (soft cyan) -->
         <article class="shiny-card" data-key="ai" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffd9ff,#baffd8,#bfe8ff); --cardbg: linear-gradient(180deg, rgba(186,255,216,0.03), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(186,255,216,0.03), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-cyan-200">7. Artificial Intelligence</h3>
             <p class="mt-2 text-sm text-slate-200">Monetize AI tools: generate content, analyze trends, and offer automation services. Sell prompts or services via the marketplace.</p>
@@ -302,7 +289,7 @@
 
         <!-- Card 8 - NFTs / Metaverse (pastel) -->
         <article class="shiny-card" data-key="nft" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffdfaa,#c8ffd3,#ccecff); --cardbg: linear-gradient(180deg, rgba(255,223,170,0.03), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,223,170,0.03), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-amber-200">8. Digital Art Marketplace & Virtual Real Estate</h3>
             <p class="mt-2 text-sm text-slate-200">Create, list and sell digital art and trade virtual real estate. Earn royalties and trade properties on curated drops and auctions.</p>
@@ -315,7 +302,7 @@
 
         <!-- Card 9 - Blogging (soft green) -->
         <article class="shiny-card" data-key="writing" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffd9b3,#cfffda,#cfe9ff); --cardbg: linear-gradient(180deg, rgba(207,255,218,0.03), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(207,255,218,0.03), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-emerald-200">9. Blogging / Articles Writing</h3>
             <p class="mt-2 text-sm text-slate-200">Publish content and earn per view, ad-share, or sponsored assignments. Top authors receive editorial boosts and monetization perks.</p>
@@ -328,7 +315,7 @@
 
         <!-- Card 10 - Gifts (soft pink) -->
         <article class="shiny-card" data-key="gifts" role="button" tabindex="0" aria-pressed="false"
-                 style="--g: conic-gradient(#ffd6d6,#c8ffda,#bfeaff); --cardbg: linear-gradient(180deg, rgba(255,214,214,0.03), rgba(255,255,255,0.01));">
+                 style="--cardbg: linear-gradient(180deg, rgba(255,214,214,0.03), rgba(255,255,255,0.01));">
           <div class="content">
             <h3 class="earn-title font-bold text-lg text-pink-200">10. Surprise Gifts & Offers</h3>
             <p class="mt-2 text-sm text-slate-200">Early members receive giveaways, seasonal bonuses and exclusive offers. Claim rewards from the dashboard or via WhatsApp for priority handling.</p>
@@ -400,37 +387,39 @@
   <!-- Toast -->
   <div id="toast" style="position:fixed;left:50%;transform:translateX(-50%);bottom:48px;background:#0b1220;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);display:none;z-index:1000;color:#e6eef8"></div>
 
-  <!-- OneSignal SDK (client) -->
+  <!-- OneSignal v16 SDK (single, recommended) -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
- <!-- OneSignal: SDK + init -->
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-<script>
-  // Standard OneSignal init (works reliably)
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "cd687662-396c-413c-a462-dfb8c5890352", // <--- keep your App ID here
-      allowLocalhostAsSecureOrigin: true,           // handy for local testing
-      welcomeNotification: {
-        title: "HELALINK",
-        message: "Thanks for enabling HELALINK notifications!"
-      }
-      // you can add autoRegister: false, persistentNotification, etc here if needed
+  <script>
+    // Your keys (you provided these) — keep server keys secret on your backend. We're storing here only because you asked.
+    const ONESIGNAL_APP_ID = 'cd687662-396c-413c-a462-dfb8c5890352';
+    const ONESIGNAL_OS_V2_KEY = 'os_v2_app_zvuhmyrznratzjdc364mlcidkjs6qssmzkcemsubi7nuyowp5omtrrufqcqztlrmvm2dzflfw5uq3dt25zri6rviudsjenevjbb72fq';
+
+    // Initialize OneSignal v16 via deferred callback. This provides a OneSignal object to your page logic.
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(function(OneSignal) {
+      OneSignal.init({
+        appId: ONESIGNAL_APP_ID,
+        allowLocalhostAsSecureOrigin: true,
+        notifyButton: { enable: true },
+        welcomeNotification: {
+          title: 'HELALINK',
+          message: 'Thanks for enabling HELALINK notifications!'
+        }
+      });
+
+      // expose a stable instance for existing page code
+      window.OneSignalInstance = OneSignal;
+      console.log('OneSignal v16 initialized (appId: ' + ONESIGNAL_APP_ID + ')');
     });
-
-    // expose a stable instance for your existing page logic
-    window.OneSignalInstance = OneSignal;
-
-    console.log("OneSignal initialized.");
-  });
-</script>
+  </script>
 
   <script>
     /************************************************************
-     * Updated: remove triangle+rect, colored card sections,
-     * confetti + congrats burst on any button click,
-     * animated hand pointing at the Enable Notifications button,
-     * mobile-friendly layout.
+     * Updated: removed animated rectangular borders (they caused
+     * the rolling rectangle issue), kept per-card colored sections
+     * via --cardbg, and integrated OneSignal v16 using the keys
+     * you provided. Remember to upload OneSignal worker files at
+     * your site root (OneSignalSDKWorker.js & OneSignalSDKUpdaterWorker.js).
      ************************************************************/
 
     // Helper: small toast
@@ -620,7 +609,7 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); notifyBtn.click(); }
     });
 
-    // OneSignal: Notify button flow (preserves working logic)
+    // OneSignal: Notify button flow (preserves working logic for v16 via window.OneSignalInstance)
     document.getElementById('notifyBtn').addEventListener('click', async () => {
       try {
         // Wait for OneSignalInstance to be initialized (poll)
@@ -638,14 +627,12 @@
           return;
         }
         const OneSignal = window.OneSignalInstance;
-        // prefer OneSignal prompts
+        // prefer OneSignal prompts (v16 methods)
         try {
-          if (typeof OneSignal.showNativePrompt === 'function') {
+          if (OneSignal && typeof OneSignal.prompts !== 'undefined' && typeof OneSignal.prompts.show === 'function') {
+            await OneSignal.prompts.show();
+          } else if (typeof OneSignal.showNativePrompt === 'function') {
             await OneSignal.showNativePrompt();
-          } else if (typeof OneSignal.showSlidedownPrompt === 'function') {
-            await OneSignal.showSlidedownPrompt();
-          } else if (typeof OneSignal.registerForPushNotifications === 'function') {
-            await OneSignal.registerForPushNotifications();
           } else {
             const p = await Notification.requestPermission();
             if (p !== 'granted') { showToast('Permission denied.'); return; }
@@ -711,7 +698,7 @@
     });
 
     // Done
-    console.log('HELALINK page loaded — modified build with confetti & hand pointer.');
+    console.log('HELALINK page loaded — updated build (static card borders, OneSignal v16 integration).');
   </script>
 </body>
 </html>
