@@ -608,53 +608,53 @@ startCarousel();
   <div class="testimonials">
     <h3>💬 What Our Members Say</h3>
     <div class="testimonial-slider">
-      <div class="testimonial active">
-        <p>“HELALINK changed my life — I started earning within weeks. The support team is always there when I need them.”</p>
+      <div class="testimonial kenya active">
+        <p>“HELALINK is launching soon and I can’t wait — finally a trusted platform by BestTech Management.”</p>
         <div class="testimonial-user">
           <img src="https://i.pravatar.cc/80?img=47" alt="Sarah">
           <span><b>Sarah M.</b> — Kenya 🇰🇪</span>
         </div>
       </div>
-      <div class="testimonial">
-        <p>“A truly transparent platform. No fake promises, just real opportunities. Proud to be part of the HELALINK community!”</p>
+      <div class="testimonial uganda">
+        <p>“A new opportunity for Africa. I’m joining on launch day — BestTech has never disappointed us.”</p>
         <div class="testimonial-user">
           <img src="https://i.pravatar.cc/80?img=12" alt="James">
           <span><b>James O.</b> — Uganda 🇺🇬</span>
         </div>
       </div>
-      <div class="testimonial">
-        <p>“The multi-level program and online games are amazing. Finally, a platform that mixes fun with real earnings.”</p>
+      <div class="testimonial tanzania">
+        <p>“I believe this platform will be a life changer. I’m ready for launch day with my team.”</p>
         <div class="testimonial-user">
           <img src="https://i.pravatar.cc/80?img=33" alt="Anita">
           <span><b>Anita K.</b> — Tanzania 🇹🇿</span>
         </div>
       </div>
-      <div class="testimonial">
-        <p>“I was skeptical at first, but HELALINK proved to be real. My extra income has been consistent every month.”</p>
+      <div class="testimonial ghana">
+        <p>“We are excited in Ghana — this will change lives. I trust BestTech to deliver again.”</p>
         <div class="testimonial-user">
           <img src="https://i.pravatar.cc/80?img=56" alt="Kwame">
           <span><b>Kwame A.</b> — Ghana 🇬🇭</span>
         </div>
       </div>
-      <div class="testimonial">
-        <p>“The WhatsApp support group is very helpful. I’ve learned new earning methods and met great people.”</p>
+      <div class="testimonial malawi">
+        <p>“In Malawi, many are waiting. I’m ready to start building with HELALINK on launch.”</p>
         <div class="testimonial-user">
-          <img src="https://i.pravatar.cc/80?img=22" alt="Grace">
-          <span><b>Grace N.</b> — Malawi 🇲🇼</span>
+          <img src="https://i.pravatar.cc/80?img=23" alt="Chikondi">
+          <span><b>Chikondi P.</b> — Malawi 🇲🇼</span>
         </div>
       </div>
-      <div class="testimonial">
-        <p>“What I love most is the transparency. I can track my progress daily and cash out with no issues.”</p>
+      <div class="testimonial botswana">
+        <p>“Botswana is ready! The BestTech team has always been reliable — HELALINK will be huge.”</p>
         <div class="testimonial-user">
-          <img src="https://i.pravatar.cc/80?img=41" alt="Thabo">
-          <span><b>Thabo P.</b> — Botswana 🇧🇼</span>
+          <img src="https://i.pravatar.cc/80?img=64" alt="Naledi">
+          <span><b>Naledi S.</b> — Botswana 🇧🇼</span>
         </div>
       </div>
-      <div class="testimonial">
-        <p>“Finally, a reliable online earning platform! HELALINK has helped me pay my bills and support my family.”</p>
+      <div class="testimonial zambia">
+        <p>“Zambia is preparing for launch day. HELALINK is the next big opportunity for us.”</p>
         <div class="testimonial-user">
-          <img src="https://i.pravatar.cc/80?img=60" alt="Linda">
-          <span><b>Linda Z.</b> — Zambia 🇿🇲</span>
+          <img src="https://i.pravatar.cc/80?img=71" alt="Brian">
+          <span><b>Brian K.</b> — Zambia 🇿🇲</span>
         </div>
       </div>
     </div>
@@ -670,7 +670,7 @@ startCarousel();
 .todo-section, .trust-section {
   padding: 60px 20px;
   text-align: center;
-  background: linear-gradient(135deg, #e6f7ff, #f0fff4); /* soft gradient */
+  background: #f4f9ff; /* Light blue background */
 }
 
 .todo-section h2, .trust-section h2 {
@@ -691,8 +691,7 @@ startCarousel();
 }
 
 .accordion-header {
-  background: linear-gradient(135deg, #00c6ff, #0072ff); /* blue gradient */
-  color: #fff;
+  background: #fff;
   width: 100%;
   text-align: left;
   padding: 15px 20px;
@@ -702,26 +701,24 @@ startCarousel();
   border: none;
   outline: none;
   transition: background 0.3s ease;
-  border-radius: 8px;
 }
 
 .accordion-header:hover {
-  background: linear-gradient(135deg, #0099cc, #005fa3);
+  background: #f9f9f9;
 }
 
 .accordion-body {
-  display: none;
-  padding: 0 20px 15px 20px;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
   font-size: 0.95rem;
   color: #444;
-  animation: fadeIn 0.4s ease;
-  background: #ffffffda;
-  border-radius: 6px;
-  margin-top: 5px;
+  transition: max-height 0.4s ease, padding 0.3s ease;
 }
 
 .accordion-item.active .accordion-body {
-  display: block;
+  max-height: 200px;
+  padding: 15px 20px;
 }
 
 /* Testimonials */
@@ -742,16 +739,15 @@ startCarousel();
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  min-height: 200px;
+  min-height: 220px;
 }
 
 .testimonial {
   display: none;
   font-size: 1rem;
-  color: #444;
+  color: #222;
   line-height: 1.6;
   padding: 25px;
-  background: #ffffffda;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
@@ -760,6 +756,15 @@ startCarousel();
   display: block;
   animation: fadeIn 0.8s ease;
 }
+
+/* Country-based colors */
+.testimonial.kenya { background: #e0f7fa; }     /* light cyan */
+.testimonial.uganda { background: #fff9c4; }    /* light yellow */
+.testimonial.tanzania { background: #ffe0b2; }  /* light orange */
+.testimonial.ghana { background: #f8bbd0; }     /* pink */
+.testimonial.malawi { background: #dcedc8; }    /* light green */
+.testimonial.botswana { background: #c5cae9; }  /* light purple */
+.testimonial.zambia { background: #b2dfdb; }    /* teal */
 
 .testimonial-user {
   display: flex;
@@ -783,20 +788,29 @@ startCarousel();
 }
 
 .testimonial-btn {
-  background: linear-gradient(135deg, #00c6ff, #0072ff); /* match accordion */
-  color: #fff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
   border: none;
   font-size: 1.5rem;
   padding: 8px 14px;
-  margin: 12px;
   cursor: pointer;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: background 0.3s ease;
 }
 
 .testimonial-btn:hover {
-  background: linear-gradient(135deg, #0099cc, #005fa3);
+  background: #f1f1f1;
+}
+
+.testimonial-btn.prev {
+  left: -40px;
+}
+
+.testimonial-btn.next {
+  right: -40px;
 }
 
 @keyframes fadeIn {
@@ -804,6 +818,64 @@ startCarousel();
   to {opacity: 1; transform: translateY(0);}
 }
 </style>
+
+<script>
+// ================= Accordion Logic =================
+document.querySelectorAll(".accordion-header").forEach(button => {
+  button.addEventListener("click", () => {
+    const item = button.parentElement;
+    const accordion = item.parentElement;
+
+    // Close all
+    accordion.querySelectorAll(".accordion-item").forEach(other => {
+      if (other !== item) {
+        other.classList.remove("active");
+      }
+    });
+
+    // Toggle clicked one
+    item.classList.toggle("active");
+  });
+});
+
+// ================= Testimonials Slider =================
+const testimonials = document.querySelectorAll(".testimonial");
+const prevBtn = document.querySelector(".testimonial-btn.prev");
+const nextBtn = document.querySelector(".testimonial-btn.next");
+
+let currentIndex = 0;
+
+function showTestimonial(index) {
+  testimonials.forEach((t, i) => {
+    t.classList.remove("active");
+    if (i === index) t.classList.add("active");
+  });
+}
+
+function nextTestimonial() {
+  currentIndex = (currentIndex + 1) % testimonials.length;
+  showTestimonial(currentIndex);
+}
+
+function prevTestimonial() {
+  currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+  showTestimonial(currentIndex);
+}
+
+nextBtn.addEventListener("click", nextTestimonial);
+prevBtn.addEventListener("click", prevTestimonial);
+
+// Auto-slide every 5 seconds
+let autoSlide = setInterval(nextTestimonial, 5000);
+
+// Pause auto-slide on hover
+document.querySelector(".testimonial-slider").addEventListener("mouseenter", () => {
+  clearInterval(autoSlide);
+});
+document.querySelector(".testimonial-slider").addEventListener("mouseleave", () => {
+  autoSlide = setInterval(nextTestimonial, 5000);
+});
+</script>
 
   </main>
 
