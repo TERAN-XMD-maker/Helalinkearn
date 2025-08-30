@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <!-- PushEngage snippet (left exactly as you pasted it) -->
+  <!-- PushEngage snippet (LEFT EXACTLY as you provided) -->
   <script>
   (function(w, d) {
     w.PushEngage = w.PushEngage || [];
@@ -28,150 +28,151 @@
   </script>
 
   <style>
-    :root{
-      --bg:#03040a;
-      --glass: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      --muted:#94a3b8;
-    }
-    html,body{min-height:100%;background:linear-gradient(180deg,#02020a 0%, #04061a 100%);color:#e6eef8;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto;margin:0;padding:0}
+    :root{--bg:#000;--fg:#e6eef8}
+    html,body{min-height:100%;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto;margin:0;padding:0}
 
+    /* Rainbow gradient helpers */
     .rainbow{background:linear-gradient(90deg,#ff0066,#ffcc00,#33ff00,#00ccff,#7a00ff);background-size:600% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:slide 7s linear infinite}
     @keyframes slide{0%{background-position:0% 50%}100%{background-position:100% 50%}}
-    .caret::after{content:"|";margin-left:6px;animation:blink 1s step-end infinite}
-    @keyframes blink{50%{opacity:0}}
 
-    /* Hero / rocket */
-    .rocket-viewport{position:relative;height:360px;border-radius:16px;overflow:hidden;background:radial-gradient(ellipse at center,#04102a 0%, #000814 60%);box-shadow:0 10px 40px rgba(0,0,0,.7)}
-    .stars{position:absolute;inset:0;background-repeat:repeat;pointer-events:none}
-    .stars.layer1{background-image:radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.9) 40%, transparent 41%);background-size:1200px 600px;animation:move1 28s linear infinite}
-    .stars.layer2{background-image:radial-gradient(1.2px 1.2px at 80px 120px, rgba(255,255,255,.6) 40%, transparent 41%);background-size:900px 450px;animation:move2 18s linear infinite}
-    .stars.layer3{background-image:radial-gradient(0.9px 0.9px at 200px 90px, rgba(255,255,255,.35) 40%, transparent 41%);background-size:600px 300px;animation:move3 10s linear infinite}
-    @keyframes move1{from{transform:translateX(0) translateY(0)}to{transform:translateX(-1200px) translateY(-400px)}}
-    @keyframes move2{from{transform:translateX(0) translateY(0)}to{transform:translateX(-900px) translateY(-250px)}}
-    @keyframes move3{from{transform:translateX(0) translateY(0)}to{transform:translateX(-600px) translateY(-120px)}}
+    /* Layout */
+    .container{max-width:1100px;margin:0 auto;padding:28px 18px}
+    header{position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.4));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    h1,h2{font-family:'Space Grotesk',Inter,system-ui}
 
-    /* Card (pad) */
-    .shiny-card {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      padding: 18px;
-      background: var(--cardbg, var(--glass));
-      border: 1px solid rgba(255,255,255,0.04);
-      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-      cursor: pointer;
-      min-height:120px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-    .shiny-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,.75) }
-    .shiny-card .content { position:relative; z-index: 1; }
-    .shiny-card.selected{ outline: 3px solid rgba(255,255,255,0.06); box-shadow: 0 30px 60px rgba(0,0,0,0.6); transform: translateY(-8px) }
-    .shiny-card .meta { margin-top:12px; display:flex;justify-content:space-between;align-items:center }
-    .interest-badge { font-size: 12px; padding: 6px 8px; border-radius: 999px; background: rgba(0,0,0,0.12); display:inline-block; }
+    /* Hero / countdown */
+    .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
+    @media(max-width:960px){ .hero-grid{grid-template-columns:1fr} .rocket-viewport{order:2} }
+    .rocket-viewport{position:relative;height:420px;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 10px 40px rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center}
+    .hero-left{padding:8px}
 
-    /* notify button + mini countdown */
-    .notify-btn { display:inline-flex; align-items:center; gap:10px; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,0.06); background:linear-gradient(90deg,#05202b,#071326); color:#cfeeff; font-weight:800; cursor:pointer; }
-    .notify-mini { font-family:monospace; font-weight:800; font-size:13px; color:#cfe3ff; background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px }
+    .big-count { text-align:center; margin-top:18px; margin-bottom:8px }
+    .big-count .value { font-family: 'Space Grotesk', Inter, system-ui; font-weight:900; font-size:clamp(36px,8vw,72px); line-height:0.95; letter-spacing:-2px; background:linear-gradient(90deg,#ff0066,#ffcc00,#33ff00,#00ccff,#7a00ff); -webkit-background-clip:text; background-clip:text; color:transparent; animation:slide 6s linear infinite }
+    .big-count .sub { color:rgba(255,255,255,0.7); margin-top:6px; font-weight:700 }
 
-    /* confetti & congrats */
-    #confettiWrap{ position: fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:1500; overflow:visible; }
-    .confetti { position:absolute; width:8px; height:12px; opacity:0.95; border-radius:2px; transform-origin:center; animation:confettiFall 1600ms linear forwards; }
-    @keyframes confettiFall { 0%{ transform:translateY(-10vh) rotate(0) } 100%{ transform:translateY(120vh) rotate(720deg) } }
-    .congratsPill{ position:fixed;left:50%;transform:translateX(-50%);bottom:120px;background:linear-gradient(90deg,#10b981,#60a5fa);color:#02121b;padding:12px 18px;border-radius:999px;font-weight:700;z-index:1600;display:none }
+    .count-wrap-compact{display:flex;align-items:center;gap:18px;margin-top:18px}
+    .days-box{background:linear-gradient(90deg,#0f172a,#0b1220);border-radius:12px;padding:18px 22px;box-shadow:0 8px 30px rgba(8,10,20,0.6);min-width:120px;text-align:center}
+    .days-box .num{font-size:40px;font-weight:900;letter-spacing:-1px;color:#fff}
+    .hms-nums{display:flex;gap:8px;margin-left:6px}
+    .hms-nums .unit{background:rgba(255,255,255,0.03);padding:10px 12px;border-radius:10px;min-width:64px;text-align:center;font-weight:800;font-family:monospace}
+    .flip{animation:flipAnim .45s ease}
+    @keyframes flipAnim{0%{transform:translateY(-12px) rotateX(20deg);opacity:0}50%{transform:translateY(6px) rotateX(-8deg);opacity:1}100%{transform:translateY(0) rotateX(0);opacity:1}}
 
-    /* hand pointer */
-    #handPointer{ position:fixed; width:64px; height:64px; right:22px; bottom:110px; z-index:1700; pointer-events:none; opacity:0; transition:opacity .22s ease }
-    #handPointer svg{ animation: handWiggle 1100ms infinite ease-in-out; transform-origin:center }
-    @keyframes handWiggle{ 0%{transform:translateY(0)}40%{transform:translateY(-6px) rotate(-6deg)}80%{transform:translateY(0) rotate(2deg)}100%{transform:translateY(0)} }
+    /* Emoji rocket */
+    .rocket-emoji{font-size:84px; transform:translateY(0); animation:rocketLift 4s ease-in-out infinite; filter:drop-shadow(0 18px 40px rgba(120,60,200,0.15));}
+    @keyframes rocketLift{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}100%{transform:translateY(0) rotate(-6deg)}}
 
-    /* small helpers */
-    .glass{background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px)}
-    .text-slate-400 { color: #cbd5e1; }
-    .earn-grid { display:grid; gap:16px; grid-template-columns: repeat(1,1fr); }
-    @media(min-width:640px){ .earn-grid{ grid-template-columns: repeat(2,1fr); } }
-    @media(min-width:1024px){ .earn-grid{ grid-template-columns: repeat(3,1fr); } }
-    @media(min-width:1280px){ .earn-grid{ grid-template-columns: repeat(4,1fr); } }
+    /* Pads / ways of earning */
+    .earn-grid{display:grid;gap:14px;grid-template-columns:repeat(1,1fr)}
+    @media(min-width:720px){.earn-grid{grid-template-columns:repeat(3,1fr)}}
+    .pad{border-radius:12px;padding:18px;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;border:1px solid rgba(255,255,255,0.04);transition:transform .16s ease,box-shadow .16s ease}
+    .pad .title{font-weight:900}
+    .pad .desc{font-size:13px;color:rgba(255,255,255,0.78)}
+    .pad .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .pad.selected{outline:3px solid rgba(255,255,255,0.06);transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,0.6)}
 
-    /* accessible focus */
-    .shiny-card:focus{ outline:3px solid rgba(99,102,241,0.12); outline-offset:2px }
+    /* Joiners */
+    .joiners-wrap{display:grid;grid-template-columns:1fr 320px;gap:14px}
+    @media(max-width:900px){.joiners-wrap{grid-template-columns:1fr}}
+    .joiner-card{display:flex;gap:12px;align-items:center;padding:8px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent)}
+    .online-chip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);padding:6px;border-radius:8px}
 
-    /* small responsive tweaks */
-    @media(max-width:640px){ .rocket-viewport{height:220px} #handPointer{right:14px;bottom:120px;width:48px;height:48px} .shiny-card{min-height:110px;padding:14px} }
+    /* Floating notify button (heartbeat + pulse) */
+    .notify-fixed{position:fixed;right:22px;bottom:22px;z-index:2200}
+    .notify-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:999px;background:linear-gradient(90deg,#06121a,#07202a);border:1px solid rgba(255,255,255,0.06);cursor:pointer;color:white;font-weight:800;box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    .notify-icon{width:18px;height:18px;display:inline-block;transform-origin:center;animation:heartbeat 1200ms infinite}
+    @keyframes heartbeat{0%{transform:scale(1)}25%{transform:scale(1.18)}40%{transform:scale(1)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+    .pulse-ring{position:absolute;right:-6px;bottom:-6px;width:48px;height:48px;border-radius:999px;pointer-events:none;opacity:0.12;background:radial-gradient(circle at center,#7a00ff 0%, transparent 50%);animation:ringPulse 2000ms infinite}
+    @keyframes ringPulse{0%{transform:scale(0.9);opacity:0.12}50%{transform:scale(1.12);opacity:0.06}100%{transform:scale(0.9);opacity:0.12}}
+
+    /* WhatsApp floating */
+    .wa-fixed{position:fixed;left:22px;bottom:22px;z-index:2200}
+    .wa-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:999px;background:linear-gradient(90deg,#25D366,#128C7E);color:#02120a;font-weight:800;box-shadow:0 14px 36px rgba(3,105,85,0.2)}
+
+    /* Modals */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;z-index:2600}
+    .modal{background:linear-gradient(180deg,#041020,#071224);border-radius:12px;padding:20px;max-width:720px;width:94%;box-shadow:0 30px 60px rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.04);color:var(--fg)}
+    .modal h3{font-size:20px;margin:0 0 8px 0}
+    .modal p{margin:0 0 14px 0;color:rgba(255,255,255,0.78)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:800}
+    .btn-cta{background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#001219}
+    .btn-secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--fg)}
+
+    /* Toast */
+    .toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#071224;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);display:none;color:var(--fg);z-index:2700}
+
+    @media(max-width:640px){ .rocket-viewport{height:300px} .days-box{min-width:100px} .hms-nums .unit{min-width:54px} .hero-grid{grid-template-columns:1fr} .wa-fixed{left:14px} .notify-fixed{right:14px} }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header class="sticky top-0 z-40 border-b border-white/5 bg-[#020316]/60 backdrop-blur">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="text-sm text-slate-300">Official Launch <span class="font-semibold">13 Sep 2025, 2:00 PM EAT</span></div>
+  <header>
+    <div class="container flex items-center justify-between py-3">
+      <div class="text-sm text-slate-300">Official Launch <strong>13 Sep 2025, 2:00 PM EAT</strong></div>
       <div class="text-xs text-slate-400">Secure your spot — join early</div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-4 pt-10 pb-28" id="pageRoot" style="position:relative;">
-    <!-- Hero -->
-    <section class="grid md:grid-cols-2 gap-8 items-start">
-      <div>
+  <!-- Main -->
+  <main class="container">
+    <section class="hero-grid">
+      <!-- Left: hero + countdown + CTA -->
+      <div class="hero-left">
         <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
           <span class="rainbow">HELALINK</span>
-          <span class="block mt-2 caret" id="type" aria-hidden="true"></span>
+          <span class="block mt-2 caret" id="type"></span>
         </h1>
-        <p class="mt-5 text-slate-300 max-w-prose">A next-gen online business platform. Set new records in networking and unlock multiple earning streams. Don’t miss the launch — secure your spot now.</p>
+        <p class="mt-4 text-slate-300 max-w-prose">Next-gen business platform — multiple earning streams. Launching soon; enable notifications to get the best perks.</p>
 
-        <div class="mt-6 flex gap-3 items-center">
-          <a href="#join" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-500/30 to-indigo-500/20 border border-cyan-400/20 text-cyan-200 font-semibold hover:scale-[1.02] transition" aria-label="Join the waitlist">Join the Waitlist</a>
+        <div class="mt-6 flex items-center gap-4">
+          <a href="#join" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-500/30 to-indigo-500/20 border border-cyan-400/20 text-cyan-200 font-semibold focus-ring">Join the Waitlist</a>
 
-          <!-- Press Here button (PushEngage usage: subscribe) -->
-          <button id="notifyBtn" class="notify-btn" aria-label="Press to enable notifications">
-            <span class="notify-label">Press Here 🔔</span>
-            <span id="notifyMini" class="notify-mini" aria-live="polite" aria-atomic="true">--d --h</span>
-          </button>
+          <!-- Notify button (also separate floating copy exists) -->
+          <div id="notifyBtnInline" class="notify-cta focus-ring" role="button" aria-pressed="false" aria-label="Press to enable notifications" style="display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:18px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(90deg,#071826,#04202a);color:#fff;font-weight:800;cursor:pointer">
+            <svg class="notify-heart" viewBox="0 0 24 24" width="18" height="18" fill="url(#gh)" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gh" x1="0" x2="1"><stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#ffcc66"/></linearGradient></defs><path d="M12 21s-7.5-4.35-9.25-6.1C-0.1 11.97 1 6.9 4.75 5.25 7 4 9.6 5 12 7.2 14.4 5 17 4 19.25 5.25 23 6.9 24.1 11.97 21.25 14.9 19.5 16.65 12 21 12 21z"></path></svg>
+            <span class="notify-label">Enable Notifications</span>
+          </div>
 
-          <a href="https://wa.me/254717028877?text=Hi%20HELALINK%20team!%20I%20want%20to%20join%20the%20launch%20waitlist." target="_blank" class="px-4 py-3 rounded-2xl bg-amber-500/10 border border-amber-400/20 text-amber-300 font-semibold hover:scale-[1.02] transition" aria-label="Join via WhatsApp">Join via WhatsApp</a>
+          <a href="https://wa.me/254717028877?text=Hi%20HELALINK%20team!%20I%20want%20to%20join%20the%20launch%20waitlist." target="_blank" class="px-4 py-3 rounded-2xl bg-amber-500/10 border border-amber-400/20 text-amber-300 font-semibold">Join via WhatsApp</a>
         </div>
 
-        <p class="mt-3 text-xs text-slate-400">We’ll send launch alerts and offers. You can opt out anytime.</p>
+        <!-- Big rainbow countdown -->
+        <div class="big-count mt-8" aria-live="polite">
+          <div id="bigCountdown" class="value">--d --:--:--</div>
+          <div class="sub">Official Launch — 13 Sep 2025 • 2:00 PM EAT</div>
+        </div>
 
-        <!-- Countdown (hero) -->
-        <div class="mt-6">
-          <div class="countdown-pill glass" id="heroCountdown" role="status" aria-live="polite" aria-atomic="true">
-            <div style="display:flex;gap:12px;align-items:center">
-              <div style="display:flex;gap:8px">
-                <div class="count-unit" title="Days remaining"><div class="count-number" id="cdDays">--</div><div class="count-label">Days</div></div>
-                <div class="count-unit" title="Hours remaining"><div class="count-number" id="cdHours">--</div><div class="count-label">Hours</div></div>
-                <div class="count-unit" title="Minutes remaining"><div class="count-number" id="cdMinutes">--</div><div class="count-label">Minutes</div></div>
-                <div class="count-unit" title="Seconds remaining"><div class="count-number" id="cdSeconds">--</div><div class="count-label">Seconds</div></div>
-              </div>
-              <div class="countdown-small ml-4">13 Sep 2025 • 2:00 PM EAT</div>
-            </div>
+        <!-- Compact countdown -->
+        <div class="count-wrap-compact mt-4" aria-hidden="false">
+          <div class="days-box" aria-live="polite" aria-atomic="true">
+            <div class="num" id="daysNum">--</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:6px">DAYS</div>
+          </div>
+
+          <div class="hms-nums">
+            <div class="unit" id="hUnit">--</div>
+            <div class="unit" id="mUnit">--</div>
+            <div class="unit" id="sUnit">--</div>
           </div>
         </div>
 
-        <div class="mt-4 glass rounded-2xl p-4" role="note">
-          <h4 class="font-semibold">Notification schedule (example)</h4>
-          <p class="text-sm text-slate-300">If you enable notifications we'll register your browser token and can send 3 scheduled notifications: <strong>24 hours before</strong>, <strong>1 hour before</strong>, and <strong>at launch</strong>. Pick interests below to personalize messages.</p>
+        <div class="mt-6 glass rounded-2xl p-4" role="note" style="background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:12px">
+          <h4 class="font-semibold">Notification schedule</h4>
+          <p class="text-sm text-slate-300">We’ll send 24h before, 1h before, and at launch. Pick interests below to personalize messages.</p>
         </div>
       </div>
 
-      <div class="rocket-viewport relative glass p-6" aria-hidden="true">
-        <div class="stars layer1"></div>
-        <div class="stars layer2"></div>
-        <div class="stars layer3"></div>
+      <!-- Right: rocket viewport -->
+      <div class="rocket-viewport glass p-6 relative" aria-hidden="true">
+        <div class="stars" aria-hidden="true">
+          <div class="layer a"></div>
+          <div class="layer b"></div>
+          <div class="layer c"></div>
+        </div>
 
-        <div class="rocket-center" style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);z-index:20;pointer-events:none">
-          <!-- Rocket SVG -->
-          <svg viewBox="0 0 120 240" width="220" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="rb2" x1="0" x2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient></defs>
-            <g>
-              <path d="M60 14 C74 40 78 84 78 114 L42 114 C42 84 46 40 60 14Z" fill="url(#rb2)" stroke="#ffffff14" stroke-width="1"/>
-              <rect x="44" y="114" width="32" height="46" rx="8" fill="#ffffff09"/>
-              <circle cx="60" cy="64" r="12" fill="#020316" stroke="#c7d2fe" stroke-width="1"/>
-              <g id="flame"><path d="M60 158 C54 182 54 210 60 226 C66 210 66 182 60 158Z" fill="#fb923c"/><path d="M60 170 C56 188 56 200 60 212 C64 200 64 188 60 170Z" fill="#ef4444"/></g>
-              <text x="60" y="58" text-anchor="middle" style="font-family:'Space Grotesk',Inter,system-ui;fill:#ffffffcc;font-weight:700;font-size:10px;letter-spacing:2px">HELALINK</text>
-            </g>
-          </svg>
+        <!-- emoji rocket -->
+        <div aria-hidden="true" style="z-index:20;pointer-events:none">
+          <div class="rocket-emoji">🚀</div>
         </div>
 
         <div class="absolute left-4 bottom-4 p-3 rounded-lg bg-white/3 text-sm font-semibold">Preparing for Liftoff • 13 Sep 2025 • 2:00 PM EAT</div>
@@ -179,326 +180,272 @@
     </section>
 
     <!-- Ways of earning -->
-    <section id="earn" class="mt-12" style="position:relative;">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">Ways of earning <span class="rainbow">HELALINK Agencies — drop incoming</span></h2>
+    <section id="earn" class="mt-10">
+      <h2 class="text-2xl font-bold mb-1">♦️HELALINK AGENCIES dropping soon♦️ 🔜</h2>
+      <div class="text-sm text-slate-300 mb-2">💎From <strong>BEST TECH MANAGEMENT</strong></div>
+      <div class="text-lg font-semibold text-amber-300 mb-4">You can't afford to miss — It's time to set up NEW RECORDS IN NETWORKING 🎊 🎉</div>
 
       <div class="earn-grid" id="earnGrid">
         <!-- 1 -->
-        <article class="shiny-card" data-key="affiliate" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(34,197,94,0.06), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-emerald-300">Multi-level Affiliate Program</h3>
-            <p class="mt-2 text-sm text-slate-200">Refer users and agencies and earn multi-tier commissions from your direct and network activity.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20join%20HELALINK%20affiliate" target="_blank">Join via WhatsApp</a>
-              <span class="text-xs text-slate-400">Agencies</span>
-            </div>
+        <article class="pad" data-key="affiliate" data-title="Multi-level Affiliate program" data-desc="Refer users and agencies and earn multi-tier commissions from your direct and network activity." style="background:linear-gradient(180deg,#e6fffa,#bbf7d0);color:#042014">
+          <div>
+            <div class="title">1. Multi-level Affiliate program</div>
+            <div class="desc">Refer users & agencies and earn multi-tier commissions.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=Hi%20HELALINK%20team!%20I%20want%20to%20join%20the%20affiliate%20program" target="_blank">Join via WhatsApp</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 2 -->
-        <article class="shiny-card" data-key="videos" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(255,205,86,0.06), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-amber-300">Watch Sponsored Videos</h3>
-            <p class="mt-2 text-sm text-slate-200">Watch short sponsored clips, validate views and receive credits that convert to cash or features.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20earn%20by%20watching%20videos" target="_blank">Start Earning</a>
-              <span class="text-xs text-slate-400">Per video payout</span>
-            </div>
+        <article class="pad" data-key="videos" data-title="Watch Sponsored Videos" data-desc="Watch short sponsored YouTube and TikTok videos, validate views and receive credits that convert to cash or features." style="background:linear-gradient(180deg,#fff7ed,#ffedd5);color:#5a2b00">
+          <div>
+            <div class="title">2. Watch Sponsored Videos</div>
+            <div class="desc">Watch short clips and earn credits redeemable for cash or features.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20to%20earn%20by%20watching%20videos" target="_blank">Start Earning</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 3 -->
-        <article class="shiny-card" data-key="roulette" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(255,140,172,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-pink-300">Roulette / Casino Spin</h3>
-            <p class="mt-2 text-sm text-slate-200">Use earned credits to spin and win prizes, multipliers and bonuses. Play responsibly.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20try%20the%20roulette" target="_blank">Play via WhatsApp</a>
-              <span class="text-xs text-slate-400">Win prizes & bonuses</span>
-            </div>
+        <article class="pad" data-key="roulette" data-title="Roulette / Casino Spin" data-desc="Use earned credits to spin and win prizes, multipliers and bonuses. Play responsibly." style="background:linear-gradient(180deg,#fff0f6,#ffe4ef);color:#3e0b1e">
+          <div>
+            <div class="title">3. Roulette / Casino Spin</div>
+            <div class="desc">Spin wheels for prizes, multipliers and bonuses.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20to%20try%20the%20roulette" target="_blank">Play via WhatsApp</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 4 -->
-        <article class="shiny-card" data-key="games" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(140,87,255,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-violet-300">Games & Quests</h3>
-            <p class="mt-2 text-sm text-slate-200">Complete in-app quests and games to win badges, credits and seasonal rewards.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20play%20games" target="_blank">Try Games</a>
-              <span class="text-xs text-slate-400">Daily quests</span>
-            </div>
+        <article class="pad" data-key="games" data-title="Online Games (Chess & Draughts)" data-desc="Play chess and draughts, complete quests, climb leaderboards and win seasonal rewards and badges." style="background:linear-gradient(180deg,#f3e8ff,#efe6ff);color:#2a0f2f">
+          <div>
+            <div class="title">4. Online Games (Chess & Draughts)</div>
+            <div class="desc">Daily matches, ranked play and rewards.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20to%20play%20games" target="_blank">Try Games</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 5 -->
-        <article class="shiny-card" data-key="ads" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(96,165,250,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-sky-300">Ads Monetization</h3>
-            <p class="mt-2 text-sm text-slate-200">Place ads on your profile or content pages and earn a share of revenue per view/click.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20monetize%20ads" target="_blank">Monetize</a>
-              <span class="text-xs text-slate-400">Revenue share</span>
-            </div>
+        <article class="pad" data-key="ads" data-title="Advertisement clicks" data-desc="Place ads on your profile or content pages and earn a share of revenue per view/click." style="background:linear-gradient(180deg,#eff6ff,#dbeafe);color:#05204a">
+          <div>
+            <div class="title">5. Advertisement clicks</div>
+            <div class="desc">Host ads and earn revenue per view or click.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20to%20monetize%20ads" target="_blank">Monetize</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 6 -->
-        <article class="shiny-card" data-key="trading" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(34,211,238,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-cyan-200">Forex & Trading Signals</h3>
-            <p class="mt-2 text-sm text-slate-200">Receive trade signals, copy strategies, and earn from spreads and successful trades.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20trading%20signals" target="_blank">Get Signals</a>
-              <span class="text-xs text-slate-400">Education & copy</span>
-            </div>
+        <article class="pad" data-key="trading" data-title="Forex Trading" data-desc="Receive signals, copy strategies and earn from successful trades — includes educational material and risk tools." style="background:linear-gradient(180deg,#ecfeff,#cffafe);color:#03363f">
+          <div>
+            <div class="title">6. Forex Trading</div>
+            <div class="desc">Signals, copy strategies and educational content.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20trading%20signals" target="_blank">Get Signals</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 7 -->
-        <article class="shiny-card" data-key="staking" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(16,185,129,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-emerald-300">Staking & Savings</h3>
-            <p class="mt-2 text-sm text-slate-200">Lock tokens or credits to earn interest and platform perks over time.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20stake" target="_blank">Stake</a>
-              <span class="text-xs text-slate-400">APY offers</span>
-            </div>
+        <article class="pad" data-key="ai" data-title="Artificial Intelligence" data-desc="Offer AI chatbots, content generation and tools to clients; charge per use or subscription." style="background:linear-gradient(180deg,#f5f3ff,#efe9ff);color:#24102f">
+          <div>
+            <div class="title">7. Artificial Intelligence</div>
+            <div class="desc">Sell AI tools, chatbots and automation to clients.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20offer%20AI%20services" target="_blank">List Service</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 8 -->
-        <article class="shiny-card" data-key="marketplace" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(250,204,21,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-amber-300">Marketplace (Sell Services)</h3>
-            <p class="mt-2 text-sm text-slate-200">Sell digital services, gigs and products to your network — collect payments on platform.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20sell%20on%20marketplace" target="_blank">List Service</a>
-              <span class="text-xs text-slate-400">Seller tools</span>
-            </div>
+        <article class="pad" data-key="marketplace" data-title="Digital Art & Virtual Real Estate" data-desc="Create NFT drops, sell digital art and virtual parcels; earn royalties and trade assets." style="background:linear-gradient(180deg,#fffbe6,#fff4cc);color:#4a3503">
+          <div>
+            <div class="title">8. Digital Art & Virtual Real Estate</div>
+            <div class="desc">NFT drops, royalties and virtual property sales.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20to%20launch%20an%20NFT" target="_blank">Launch Drop</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 9 -->
-        <article class="shiny-card" data-key="nft" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(130,80,255,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-indigo-300">NFT Drops & Royalties</h3>
-            <p class="mt-2 text-sm text-slate-200">Create limited NFT drops, sell to collectors and earn secondary royalties.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20launch%20an%20NFT" target="_blank">Launch Drop</a>
-              <span class="text-xs text-slate-400">Royalties</span>
-            </div>
+        <article class="pad" data-key="content" data-title="Blogging / Articles Writing" data-desc="Publish guides, articles and posts — earn from ad share, tips and subscriptions." style="background:linear-gradient(180deg,#ecfeff,#dbeafe);color:#00303a">
+          <div>
+            <div class="title">9. Blogging / Articles Writing</div>
+            <div class="desc">Write and publish content to earn ad share and tips.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20to%20publish%20content" target="_blank">Publish</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
 
         <!-- 10 -->
-        <article class="shiny-card" data-key="ai" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(124,58,237,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-violet-300">AI Services</h3>
-            <p class="mt-2 text-sm text-slate-200">Offer AI chatbots, content generators, and tools to clients and charge per use.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20offer%20AI%20services" target="_blank">List Service</a>
-              <span class="text-xs text-slate-400">Tools & APIs</span>
-            </div>
+        <article class="pad" data-key="gifts" data-title="Surprise Gifts & Offers" data-desc="Exchange credits for mobile money vouchers, gift cards and limited-time launch offers." style="background:linear-gradient(180deg,#fff0f6,#ffecf8);color:#3e0830">
+          <div>
+            <div class="title">10. Surprise Gifts & Offers</div>
+            <div class="desc">Redeem credits for vouchers, discounts and launch rewards.</div>
+          </div>
+          <div class="meta">
+            <a class="btn" href="https://wa.me/254717028877?text=I%20want%20gift%20cards" target="_blank">Redeem</a>
+            <button class="btn modal-open">Details</button>
           </div>
         </article>
-
-        <!-- 11 -->
-        <article class="shiny-card" data-key="content" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(96,165,250,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-sky-300">Content Creation</h3>
-            <p class="mt-2 text-sm text-slate-200">Publish guides, videos and posts — earn ad share, tips and revenue splits.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20publish%20content" target="_blank">Publish</a>
-              <span class="text-xs text-slate-400">Revenue share</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 12 -->
-        <article class="shiny-card" data-key="writing" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(255,159,67,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-orange-300">Writing & Microtasks</h3>
-            <p class="mt-2 text-sm text-slate-200">Complete short tasks, writing jobs and micro-gigs to earn quick credits.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20microtasks" target="_blank">Start Tasks</a>
-              <span class="text-xs text-slate-400">Quick payouts</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 13 -->
-        <article class="shiny-card" data-key="surveys" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(79,70,229,0.04), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-indigo-300">Surveys & Offers</h3>
-            <p class="mt-2 text-sm text-slate-200">Complete market surveys and partner offers to accumulate credits and vouchers.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20do%20surveys" target="_blank">Do Surveys</a>
-              <span class="text-xs text-slate-400">Rewards</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 14 -->
-        <article class="shiny-card" data-key="gifts" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(236,72,153,0.03), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-pink-300">Gift Cards & Rewards</h3>
-            <p class="mt-2 text-sm text-slate-200">Exchange credits for gift cards, mobile money vouchers and discounts.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20gift%20cards" target="_blank">Redeem</a>
-              <span class="text-xs text-slate-400">Instant redeem</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 15 -->
-        <article class="shiny-card" data-key="affiliate2" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(59,130,246,0.03), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-blue-300">Affiliate Marketplaces</h3>
-            <p class="mt-2 text-sm text-slate-200">Promote third-party offers from our marketplace and earn commission on conversions.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20to%20join%20affiliate%20marketplace" target="_blank">Join Marketplace</a>
-              <span class="text-xs text-slate-400">Affiliate deals</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 16 -->
-        <article class="shiny-card" data-key="freelance" role="button" tabindex="0" aria-pressed="false"
-                 style="--cardbg: linear-gradient(180deg, rgba(16,185,129,0.03), rgba(255,255,255,0.01));">
-          <div class="content">
-            <h3 class="font-bold text-lg text-emerald-300">Freelance Gigs</h3>
-            <p class="mt-2 text-sm text-slate-200">Offer freelance work on the platform — hire, get hired and manage contracts safely.</p>
-            <div class="meta">
-              <a class="px-3 py-2 rounded-lg bg-white/6 text-sm" href="https://wa.me/254717028877?text=I%20want%20freelance%20gigs" target="_blank">Offer Gigs</a>
-              <span class="text-xs text-slate-400">Secure contracts</span>
-            </div>
-          </div>
-        </article>
-
       </div>
 
-      <p class="mt-4 text-xs text-slate-400">Tap cards to pick interests (multi-select). Selections are saved locally; enable notifications to receive personalized alerts about chosen ways of earning.</p>
+      <p class="text-xs text-slate-400 mt-3">Tap cards to pick interests (multi-select). Selections are saved locally; enable notifications to receive personalized alerts about chosen ways of earning.</p>
     </section>
 
-    <!-- Real-time joiners -->
-    <section id="join" class="mt-16">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold">Real-time Joiners</h2>
-        <div class="text-sm text-slate-400">Showing latest members</div>
-      </div>
+    <!-- Joiners & online -->
+    <section id="join" class="mt-10">
+      <h2 class="text-2xl font-bold mb-3">Real-time Joiners & Online</h2>
 
-      <div class="mt-4 grid md:grid-cols-2 gap-4">
-        <div class="glass rounded-2xl p-4">
-          <div class="grid gap-3" id="professionalFeed"></div>
+      <div class="joiners-wrap">
+        <div class="rounded-lg p-4" style="background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)">
+          <div id="professionalFeed" class="grid gap-3"></div>
         </div>
 
-        <div class="glass rounded-2xl p-4 flex flex-col gap-3">
-          <div class="font-semibold">Members Online</div>
+        <aside class="rounded-lg p-4" style="background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div class="font-bold">Members online</div><div id="onlineCount" class="font-bold">0</div></div>
           <div id="onlineList" class="flex gap-3 flex-wrap"></div>
-          <div class="mt-2 text-xs text-slate-400">Active dot shows current presence. Timestamps update live.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer CTA -->
-    <section class="mt-12 text-center">
-      <div class="inline-flex items-center gap-4 glass p-4 rounded-2xl">
-        <div class="text-left">
-          <div class="text-sm text-slate-400">Want priority access and launch perks?</div>
-          <div class="font-bold text-lg">Join HELALINK early via WhatsApp</div>
-        </div>
-        <div>
-          <a href="https://wa.me/254717028877?text=Hi%20HELALINK!%20I%20want%20priority%20access" target="_blank" class="px-4 py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-pink-400 text-black font-semibold">Click to Join • 0717028877</a>
-        </div>
+        </aside>
       </div>
     </section>
   </main>
 
-  <!-- Floating WhatsApp FAB -->
-  <a class="fixed right-6 bottom-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-tr from-emerald-400 to-cyan-400 shadow-xl" target="_blank" rel="noopener" href="https://wa.me/254717028877?text=Hi%20HELALINK!%20Add%20me%20to%20the%20waitlist." aria-label="Open WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.92 11.92 0 0 0 12.05 0C5.4 0 .03 5.36.03 12a11.9 11.9 0 0 0 1.63 6L0 24l6.16-1.61A11.95 11.95 0 0 0 12 24h.01c6.64 0 12.02-5.36 12.02-12.01 0-3.21-1.25-6.23-3.51-8.51Zm-8.5 19.05h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.2-3.65.96.98-3.56-.24-.37a9.9 9.9 0 0 1-1.51-5.26c0-5.46 4.45-9.9 9.93-9.9 2.65 0 5.15 1.03 7.02 2.9a9.8 9.8 0 0 1 2.9 7c0 5.47-4.46 9.91-10 9.91Zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17-.35.22-.64.07c-.3-.15-1.26-.46-2.4-1.47-.89-.78-1.48-1.74-1.65-2.03-.17-.3-.02-.46.13-.61.14-.14.3-.37.45-.56.15-.19.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.03 1-1.03 2.46s1.06 2.86 1.2 3.06c.15.2 2.08 3.18 5.04 4.45.7.3 1.24.48 1.66.62.7.22 1.34.19 1.85.12.56-.08 1.76-.72 2.01-1.41.25-.7.25-1.3.17-1.41-.08-.12-.27-.2-.57-.35Z"/></svg>
-  </a>
+  <!-- Floating WhatsApp chat -->
+  <div class="wa-fixed">
+    <a id="waChat" class="wa-btn" href="https://wa.me/254717028877?text=Hi%20HELALINK!%20I%20want%20to%20join" target="_blank" rel="noopener noreferrer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="filter:drop-shadow(0 6px 18px rgba(0,0,0,0.15))"><path d="M20.5 3.5A11 11 0 0 0 3.5 20.5L2 22l1.6-4.5A11 11 0 1 0 20.5 3.5zM12 7.5c-1.9 0-2.7.8-3.5 1.6-.7.7-1.3 1.9-1.3 3.4 0 1.5.9 2.9 1.9 3.9.9.9 2.6 2.1 5 2.1 1.3 0 2.3-.2 3.2-.6.8-.4 1.5-1.1 1.9-1.9.4-.8.6-1.8.6-3 0-2.4-1.2-4.1-2.2-5.1-.9-.9-2.2-1.8-4.6-1.8z" fill="#fff"/></svg>
+      <span>Chat on WhatsApp</span>
+    </a>
+  </div>
 
-  <!-- Confetti + congrats + hand pointer -->
-  <div id="confettiWrap" aria-hidden="true"></div>
-  <div id="congrats" class="congratsPill">Congratulations 🎊</div>
+  <!-- Floating notify button -->
+  <div class="notify-fixed" aria-hidden="false">
+    <div id="notifyBtnStandalone" class="notify-btn" role="button" aria-pressed="false" aria-label="Enable notifications">
+      <svg class="notify-icon" viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zM18 16V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 1 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="white"/></svg>
+      <span>Enable Notifications</span>
+      <div style="position:relative; margin-left:6px"><div class="pulse-ring" aria-hidden="true"></div></div>
+    </div>
+  </div>
 
-  <div id="handPointer" aria-hidden="true">
-    <svg viewBox="0 0 64 64" width="64" height="64">
-      <g fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 36v-8a6 6 0 0 1 12 0v6" />
-        <path d="M32 34v-10a6 6 0 0 1 12 0v3" />
-        <path d="M12 42c0 6 8 10 20 10s20-4 20-10v-6a6 6 0 0 0-6-6h-2" />
-        <path d="M12 42l4-12 10-6 8 2" />
-      </g>
-    </svg>
+  <!-- Notification modal (auto popup & on-demand) -->
+  <div id="notifyModal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="notifyTitle">
+    <div class="modal" role="document">
+      <h3 id="notifyTitle">Enable notifications for HELALINK</h3>
+      <p>Get important launch reminders (24h before, 1h before, and at launch), plus personalized updates about the ways you want to earn. We’ll never spam — you can opt out anytime.</p>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+        <button id="notifyEnable" class="btn btn-cta">Enable Notifications</button>
+        <button id="notifyLater" class="btn btn-secondary">Maybe later</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pad details modal -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <h3 id="modalTitle">Title</h3>
+          <p id="modalDesc" class="muted">Description</p>
+        </div>
+        <div><button id="modalClose" class="btn">✕</button></div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+        <a id="modalWA" class="btn" href="#" target="_blank">Open WhatsApp</a>
+        <button id="modalClose2" class="btn">Close</button>
+      </div>
+    </div>
   </div>
 
   <!-- Toast -->
-  <div id="toast" style="position:fixed;left:50%;transform:translateX(-50%);bottom:48px;background:#071224;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);display:none;z-index:1000;color:#e6eef8"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  <!-- Confetti wrapper -->
+  <div id="confettiWrap" style="pointer-events:none;position:fixed;left:0;top:0;width:100%;height:100%;z-index:2800"></div>
+
+  <!-- Scripts: countdown, notify flows, joiners, pads, modals -->
   <script>
-    /* ----------------------------
-      Helpers & UI behavior
-       - Countdown (hero + mini)
-       - PushEngage subscribe on Press Here
-       - Multi-select pads saved per-key in localStorage
-       - Confetti + congrats when clicking CTAs
-       - Hand pointer nudge
-       - Service worker registration (best-effort)
-    -----------------------------*/
-
-    // small toast
-    function showToast(msg, ms = 3200) {
-      const t = document.getElementById('toast');
-      if(!t) return;
-      t.textContent = msg;
-      t.style.display = 'block';
-      clearTimeout(t._hid);
-      t._hid = setTimeout(()=> t.style.display = 'none', ms);
+    // ------------------------------
+    // Utilities
+    // ------------------------------
+    function showToast(msg, ms = 3200){
+      const t = document.getElementById('toast'); if(!t) return;
+      t.textContent = msg; t.style.display = 'block'; clearTimeout(t._hid); t._hid = setTimeout(()=> t.style.display = 'none', ms);
     }
 
-    // Typewriter (tagline)
+    function fireConfetti(x=innerWidth/2,y=innerHeight/2,count=24){
+      const wrap = document.getElementById('confettiWrap');
+      const colors=['#ff7ab6','#ffd86f','#7ef080','#66e0ff','#b899ff'];
+      for(let i=0;i<count;i++){
+        const el = document.createElement('div');
+        el.style.position='absolute';
+        el.style.width=(6+Math.random()*8)+'px';
+        el.style.height=(10+Math.random()*12)+'px';
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.left = (x + (Math.random()*240-120)) + 'px';
+        el.style.top = (y + (Math.random()*120-60)) + 'px';
+        el.style.borderRadius = '2px';
+        el.style.transform = 'rotate('+Math.random()*360+'deg)';
+        el.style.opacity = '1';
+        el.style.transition = 'transform 1.6s linear, top 1.6s linear, opacity 1.6s ease';
+        wrap.appendChild(el);
+        setTimeout(()=>{ el.style.top = (y+800)+'px'; el.style.transform = 'rotate('+ (Math.random()*720)+'deg)'; el.style.opacity='0'; }, 20);
+        setTimeout(()=> el.remove(), 1800);
+      }
+      const c = document.getElementById('congrats');
+      if(c){ c.style.display='block'; setTimeout(()=> c.style.display='none', 1600); }
+    }
+
+    // ------------------------------
+    // Typewriter tagline
+    // ------------------------------
     (function(){
       const el = document.getElementById('type');
-      const words = ['Launch • Network • Earn','New ways to profit','HELALINK Agencies dropping soon','Launch: 13 Sep 2025 • 2PM EAT'];
+      const words = ['Launch • Network • Earn','New ways to profit','Agencies dropping soon','Launch: 13 Sep 2025 • 2PM EAT'];
       let wi=0, ci=0, fwd=true;
       function step(){
         const w = words[wi];
         el.textContent = w.slice(0,ci);
         if(fwd){ ci++; if(ci> w.length){ fwd=false; setTimeout(step,1200); return } }
-        else { ci--; if(ci<0){ fwd=true; wi=(wi+1)%words.length } }
-        setTimeout(step, fwd?70:36);
+        else{ ci--; if(ci<0){ fwd=true; wi=(wi+1)%words.length } }
+        setTimeout(step, fwd ? 70 : 36);
       }
       step();
     })();
 
-    // Countdown (hero + mini)
+    // ------------------------------
+    // Countdown (big + compact + ring)
+    // ------------------------------
     (function(){
-      const launch = new Date('2025-09-13T11:00:00Z'); // 2:00 PM EAT
-      const cdDays = document.getElementById('cdDays'),
-            cdHours = document.getElementById('cdHours'),
-            cdMinutes = document.getElementById('cdMinutes'),
-            cdSeconds = document.getElementById('cdSeconds'),
-            notifyMini = document.getElementById('notifyMini');
+      const big = document.getElementById('bigCountdown');
+      const daysEl = document.getElementById('daysNum');
+      const hEl = document.getElementById('hUnit');
+      const mEl = document.getElementById('mUnit');
+      const sEl = document.getElementById('sUnit');
+
+      // Launch: 13 Sep 2025 at 14:00 EAT -> 11:00:00Z
+      const launch = new Date('2025-09-13T11:00:00Z');
 
       function pad(n){ return String(n).padStart(2,'0') }
+      function animSet(el, txt){ if(!el) return; el.classList.remove('flip'); void el.offsetWidth; el.textContent = txt; el.classList.add('flip'); }
+
       function update(){
         const now = new Date();
         let diff = Math.max(0, launch - now);
@@ -506,176 +453,241 @@
         const h = Math.floor(diff / 3600000); diff -= h*3600000;
         const m = Math.floor(diff / 60000); diff -= m*60000;
         const s = Math.floor(diff / 1000);
-        if(cdDays) cdDays.textContent = pad(d);
-        if(cdHours) cdHours.textContent = pad(h);
-        if(cdMinutes) cdMinutes.textContent = pad(m);
-        if(cdSeconds) cdSeconds.textContent = pad(s);
-        if(notifyMini){
-          notifyMini.textContent = (launch - now <= 0) ? 'LAUNCHED' : (d + 'd ' + pad(h) + 'h');
+
+        animSet(daysEl, d);
+        animSet(hEl, pad(h));
+        animSet(mEl, pad(m));
+        animSet(sEl, pad(s));
+
+        if(launch - now <= 0){
+          big.textContent = 'WE ARE LIVE!';
+          fireConfetti(innerWidth/2, innerHeight/2, 80);
+        } else {
+          big.textContent = d + 'd ' + pad(h) + ':' + pad(m) + ':' + pad(s);
         }
       }
+
       update(); setInterval(update, 1000);
     })();
 
-    // Simulated "real-time" joiners (local only)
+    // ------------------------------
+    // Notification modal & subscribe flow
+    // ------------------------------
     (function(){
-      const professionalFeed = document.getElementById('professionalFeed');
+      const OPEN_KEY = 'hl_notify_modal_shown_at';
+      const SNOOZE_DAYS = 7;
+      const modalBack = document.getElementById('notifyModal');
+      const btnEnable = document.getElementById('notifyEnable');
+      const btnLater = document.getElementById('notifyLater');
+      const floating = document.getElementById('notifyBtnStandalone');
+      const inline = document.getElementById('notifyBtnInline');
+
+      function isSnoozed(){
+        try{ const v = localStorage.getItem(OPEN_KEY); if(!v) return false; const ts = parseInt(v,10); if(isNaN(ts)) return false; return Date.now() - ts < SNOOZE_DAYS * 24*3600*1000; }catch(e){ return false; }
+      }
+      function markSnoozed(){ try{ localStorage.setItem(OPEN_KEY, String(Date.now())); }catch(e){} }
+
+      let lastFocused = null;
+      function openModal(){
+        if(!modalBack) return;
+        lastFocused = document.activeElement;
+        modalBack.style.display = 'flex';
+        modalBack.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        setTimeout(()=> btnEnable.focus(), 50);
+        document.addEventListener('focus', focusTrap, true);
+        document.addEventListener('keydown', escClose);
+      }
+      function closeModal(snooze=false){
+        if(!modalBack) return;
+        modalBack.style.display = 'none';
+        modalBack.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        document.removeEventListener('focus', focusTrap, true);
+        document.removeEventListener('keydown', escClose);
+        if(snooze) markSnoozed();
+        try{ if(lastFocused) lastFocused.focus(); else floating.focus(); }catch(e){}
+      }
+      function focusTrap(e){
+        if(!modalBack || modalBack.style.display !== 'flex') return;
+        if(modalBack.contains(e.target)) return;
+        e.stopPropagation();
+        btnEnable.focus();
+      }
+      function escClose(e){ if(e.key === 'Escape'){ closeModal(true); } }
+
+      // open modal from floating/inline buttons
+      if(floating) floating.addEventListener('click', (ev)=>{ ev.preventDefault(); openModal(); });
+      if(inline) inline.addEventListener('click', (ev)=>{ ev.preventDefault(); openModal(); });
+
+      btnLater.addEventListener('click', ()=>{ closeModal(true); showToast('No problem — we will remind you later.'); });
+
+      btnEnable.addEventListener('click', async ()=>{
+        try{
+          const ready = await new Promise((resolve)=>{
+            if(window.PushEngage && typeof window.PushEngage.push === 'function') return resolve(true);
+            let waited=0; const max=8000;
+            const iv = setInterval(()=>{ if(window.PushEngage && typeof window.PushEngage.push === 'function'){ clearInterval(iv); resolve(true); } waited+=200; if(waited>=max){ clearInterval(iv); resolve(false);} },200);
+          });
+
+          if(ready){
+            try{
+              PushEngage.push(['subscribe']);
+              showToast('If you allowed notifications, you are now subscribed ✅');
+              fireConfetti(window.innerWidth/2, window.innerHeight/2, 20);
+              closeModal(false);
+              markSnoozed();
+              // set pressed states
+              floating.setAttribute('aria-pressed','true');
+              if(inline) inline.setAttribute('aria-pressed','true');
+            }catch(err){
+              console.warn('PushEngage subscribe failed', err);
+              if(window.Notification && Notification.requestPermission){
+                const p = await Notification.requestPermission();
+                if(p === 'granted'){ showToast('Notifications enabled via browser permission ✅'); }
+                else showToast('Permission denied or blocked.');
+              } else {
+                showToast('Unable to enable notifications in this browser.');
+              }
+              closeModal(false); markSnoozed();
+            }
+          } else {
+            if(window.Notification && Notification.requestPermission){
+              const p = await Notification.requestPermission();
+              if(p === 'granted'){ showToast('Notifications enabled via browser permission ✅'); fireConfetti(window.innerWidth/2, window.innerHeight/2, 20); }
+              else showToast('Permission denied or blocked.');
+            } else {
+              showToast('Notifications SDK not ready and browser permission unavailable.');
+            }
+            closeModal(false); markSnoozed();
+          }
+        }catch(e){
+          console.error(e); showToast('Something went wrong — check console.'); closeModal(false); markSnoozed();
+        }
+      });
+
+      // Auto-show modal on first load if not snoozed
+      window.addEventListener('load', ()=>{
+        setTimeout(()=>{ if(!isSnoozed()){ openModal(); } }, 1600);
+      });
+
+      // keyboard accessibility for floating button
+      if(floating) floating.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); floating.click(); } });
+      if(inline) inline.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); inline.click(); } });
+
+      // subtle initial attention animation
+      setTimeout(()=>{ if(floating) { floating.classList.add('pulse-attn'); setTimeout(()=>floating.classList.remove('pulse-attn'), 3000); } }, 1400);
+    })();
+
+    // ------------------------------
+    // Joiners simulation
+    // ------------------------------
+    (function(){
+      const feed = document.getElementById('professionalFeed');
       const onlineList = document.getElementById('onlineList');
-      if(!professionalFeed || !onlineList) return;
+      const onlineCount = document.getElementById('onlineCount');
+      if(!feed || !onlineList || !onlineCount) return;
       const names = ['Amina','Jayden','Fatma','Olu','Grace','Rashid','Ivy','Zara','Kofi','Liam','Tariq','Mira','Noah','Leah','Kwame','Nadia','Yusuf','Aaliyah'];
-      const countries = [{c:'Kenya',f:'🇰🇪'},{c:'Tanzania',f:'🇹🇿'},{c:'Uganda',f:'🇺🇬'},{c:'Nigeria',f:'🇳🇬'},{c:'Ghana',f:'🇬🇭'},{c:'Rwanda',f:'🇷🇼'},{c:'Ethiopia',f:'🇪🇹'},{c:'South Africa',f:'🇿🇦'},{c:'Egypt',f:'🇪🇬'},{c:'UAE',f:'🇦🇪'},{c:'India',f:'🇮🇳'}];
+      const countries = [{c:'Kenya',f:'🇰🇪'},{c:'Tanzania',f:'🇹🇿'},{c:'Uganda',f:'🇺🇬'},{c:'Nigeria',f:'🇳🇬'},{c:'Ghana',f:'🇬🇭'}];
       function avatar(seed){ return `https://api.dicebear.com/8.x/thumbs/svg?seed=${encodeURIComponent(seed)}&backgroundType=gradientLinear&radius=50`; }
       function timeAgo(date){ const s=Math.floor((Date.now()-date)/1000); if(s<5) return 'just now'; if(s<60) return `${s}s ago`; const m=Math.floor(s/60); if(m<60) return `${m}m ago`; const h=Math.floor(m/60); return `${h}h ago`; }
-      function createEntry(n, cc, joined){
-        const wrap = document.createElement('div'); wrap.className='joiner-card flex gap-3 items-start';
-        wrap.innerHTML = `
-          <img src="${avatar(n+cc.c)}" alt="${n}" class="w-12 h-12 rounded-full" />
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between">
-              <div class="truncate">
-                <div class="font-semibold">${n}</div>
-                <div class="text-xs text-slate-400">${cc.f} ${cc.c} • New member</div>
-              </div>
-              <div class="text-right">
-                <div class="text-xs text-slate-400">${timeAgo(joined)}</div>
-                <div class="dot-pulse mt-2"><span class="active-dot" style="display:inline-block;width:10px;height:10px;border-radius:999px;background:#22c55e"></span></div>
-              </div>
-            </div>
-            <div class="mt-2 text-xs text-slate-400">Joined via WhatsApp • ${new Date(joined).toLocaleString()}</div>
-          </div>
-        `;
+      function create(n, cc, t){
+        const wrap = document.createElement('div');
+        wrap.className = 'joiner-card';
+        wrap.innerHTML = `<img src="${avatar(n+cc.c)}" class="w-12 h-12 rounded-full" alt="${n}"/><div style="flex:1"><div style="display:flex;justify-content:space-between"><div><div style="font-weight:800">${n}</div><div class="muted">${cc.f} ${cc.c}</div></div><div style="text-align:right"><div class="muted">${timeAgo(t)}</div><div style="width:10px;height:10px;border-radius:999px;background:#22c55e;margin-top:8px"></div></div></div><div style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.6)">Joined • ${new Date(t).toLocaleString()}</div></div>`;
         return wrap;
       }
+      let count=0;
       function pushOne(){
         const n = names[Math.floor(Math.random()*names.length)];
         const cc = countries[Math.floor(Math.random()*countries.length)];
-        const j = Date.now();
-        professionalFeed.prepend(createEntry(n,cc,j));
-        while(professionalFeed.children.length>8) professionalFeed.lastElementChild.remove();
-        const chip = document.createElement('div'); chip.className='flex items-center gap-2 p-1 rounded-full bg-white/3'; chip.innerHTML = `<img src="${avatar(n+cc.c)}" class="w-8 h-8 rounded-full"/><div class="text-xs font-medium">${n}</div>`;
+        const t = Date.now();
+        feed.prepend(create(n,cc,t));
+        if(feed.children.length>10) feed.lastElementChild.remove();
+        const chip = document.createElement('div');
+        chip.className = 'online-chip';
+        chip.innerHTML = `<img src="${avatar(n+cc.c)}" style="width:34px;height:34px;border-radius:999px" alt="${n}"/><div style="font-weight:700;font-size:12px">${n}</div>`;
         onlineList.prepend(chip);
-        while(onlineList.children.length>12) onlineList.lastElementChild.remove();
+        if(onlineList.children.length>12) onlineList.lastElementChild.remove();
+        count++; onlineCount.textContent = String(Math.min(999,count));
       }
       for(let i=0;i<4;i++) pushOne();
-      setInterval(pushOne, 4200 + Math.random()*3000);
+      setInterval(pushOne, 3200 + Math.random()*3200);
     })();
 
-    // Cards: multi-select, persisted
+    // ------------------------------
+    // Pads selection (localStorage) & modal details
+    // ------------------------------
     (function(){
-      const cards = Array.from(document.querySelectorAll('.shiny-card[data-key]'));
+      const cards = Array.from(document.querySelectorAll('.pad[data-key]'));
       if(!cards.length) return;
+
       cards.forEach(card=>{
         const key = card.dataset.key;
-        // restore
-        try{
-          if(localStorage.getItem('hl_sel_'+key) === '1'){ card.classList.add('selected'); card.setAttribute('aria-pressed','true'); }
-        }catch(e){}
+        try{ if(localStorage.getItem('hl_sel_'+key) === '1'){ card.classList.add('selected'); } }catch(e){}
+
         function toggle(){
           const active = card.classList.toggle('selected');
-          card.setAttribute('aria-pressed', active ? 'true' : 'false');
           try{ localStorage.setItem('hl_sel_'+key, active ? '1' : '0'); }catch(e){}
           showToast(active ? 'Interest saved locally.' : 'Interest removed.');
         }
-        card.addEventListener('click', (e)=>{ if((e.target||{}).tagName === 'A') return; toggle(); });
-        card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); } });
+
+        card.addEventListener('click', (e)=>{
+          if((e.target||{}).tagName === 'A' || (e.target||{}).classList.contains('modal-open')) return;
+          toggle();
+        });
+        card.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
       });
-    })();
 
-    // confetti + congrats + hand pointer helper
-    function fireConfetti(x = window.innerWidth/2, y = window.innerHeight/2, count = 20){
-      const wrap = document.getElementById('confettiWrap'); const congrats = document.getElementById('congrats');
-      const colors = ['#ff7ab6','#ffd86f','#7ef080','#66e0ff','#b899ff','#ffd97a','#ff9fce'];
-      for(let i=0;i<count;i++){
-        const el = document.createElement('div'); el.className='confetti';
-        el.style.background = colors[Math.floor(Math.random()*colors.length)];
-        el.style.left = (x + (Math.random()*80 - 40)) + 'px';
-        el.style.top = (y + (Math.random()*40 - 20)) + 'px';
-        el.style.width = (6 + Math.random()*8) + 'px';
-        el.style.height = (10 + Math.random()*12) + 'px';
-        el.style.opacity = 1;
-        el.style.animationDuration = (1200 + Math.random()*700) + 'ms';
-        wrap.appendChild(el);
-        setTimeout(()=> el.remove(), 2200);
-      }
-      if(congrats){
-        congrats.style.display='block';
-        setTimeout(()=> congrats.style.display='none', 1700);
-      }
-    }
-    function showHandNear(element){
-      const hp = document.getElementById('handPointer'); if(!hp || !element) return;
-      const r = element.getBoundingClientRect();
-      const rightOffset = Math.max(12, window.innerWidth - (r.right + 12));
-      const bottomOffset = Math.max(96, window.innerHeight - (r.top) + 6);
-      hp.style.right = rightOffset + 'px';
-      hp.style.bottom = bottomOffset + 'px';
-      hp.style.opacity = '1';
-      clearTimeout(hp._hid); hp._hid = setTimeout(()=> hp.style.opacity = '0', 2400);
-    }
+      // details modal
+      (function(){
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalWA = document.getElementById('modalWA');
+        const modalClose = document.getElementById('modalClose');
+        const modalClose2 = document.getElementById('modalClose2');
 
-    // small global celebration on CTA clicks
-    document.addEventListener('click', (e)=>{
-      const t = e.target.closest('a, button');
-      if(!t) return;
-      const cx = e.clientX || window.innerWidth/2;
-      const cy = e.clientY || window.innerHeight/2;
-      fireConfetti(cx, cy, 12);
-      if(t.id === 'notifyBtn') showHandNear(t);
-      else showHandNear(document.getElementById('notifyBtn'));
-    }, {passive:true});
-
-    // service worker registration (best-effort)
-    (function(){
-      if('serviceWorker' in navigator){
-        navigator.serviceWorker.register('/pushengage-sw.js').then(r=>console.log('SW registered', r.scope)).catch(e=>console.warn('SW not registered', e));
-      }
-    })();
-
-    // Notify button -> PushEngage.subscribe (safe wait)
-    (function(){
-      const btn = document.getElementById('notifyBtn');
-      if(!btn) return;
-      btn.addEventListener('click', async ()=>{
-        try{
-          // wait for PushEngage SDK to be available (short timeout)
-          const ready = await new Promise((resolve)=>{
-            let waited = 0; const max = 8000;
-            const iv = setInterval(()=> {
-              if(window.PushEngage && typeof window.PushEngage.push === 'function'){ clearInterval(iv); resolve(true); }
-              waited += 200;
-              if(waited >= max){ clearInterval(iv); resolve(false); }
-            },200);
-          });
-          if(!ready){ showToast('Notifications loading — try again in a moment.'); showHandNear(btn); return; }
-
-          try{
-            PushEngage.push(['subscribe']); // uses your PushEngage SDK as provided
-            showToast('If you allowed notifications, you are now subscribed ✅');
-            // small confetti near button
-            const r = btn.getBoundingClientRect();
-            fireConfetti(r.left + r.width/2, r.top + r.height/2, 20);
-          }catch(err){
-            console.warn('PushEngage subscribe failed', err);
-            if(window.Notification && Notification.requestPermission){
-              const p = await Notification.requestPermission();
-              if(p === 'granted') showToast('Notifications enabled via browser permission ✅'); else showToast('Permission denied or blocked.');
-            } else {
-              showToast('Unable to enable notifications in this browser.');
-            }
+        function openCard(card){
+          const title = card.dataset.title || 'Info';
+          const desc = card.dataset.desc || '';
+          modalTitle.textContent = title;
+          modalDesc.textContent = desc;
+          const wa = card.querySelector('a');
+          if(wa && wa.href){
+            modalWA.href = wa.href;
+            modalWA.textContent = 'Open WhatsApp';
+            modalWA.target = '_blank';
+          } else {
+            modalWA.href = '#';
+            modalWA.textContent = 'Close';
           }
-        }catch(e){
-          console.error(e);
-          showToast('Something went wrong — check console.');
+          modalBackdrop.style.display = 'flex';
+          modalBackdrop.setAttribute('aria-hidden','false');
+          document.body.style.overflow = 'hidden';
+          setTimeout(()=> modalClose.focus(), 60);
         }
-      });
-      // keyboard support
-      btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); btn.click(); }});
+        function close(){
+          modalBackdrop.style.display = 'none';
+          modalBackdrop.setAttribute('aria-hidden','true');
+          document.body.style.overflow = '';
+        }
+        document.querySelectorAll('.modal-open').forEach(btn=>{
+          btn.addEventListener('click', (e)=>{
+            e.stopPropagation();
+            const card = btn.closest('.pad');
+            if(card) openCard(card);
+          });
+        });
+        modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop) close(); });
+        modalClose.addEventListener('click', close);
+        modalClose2.addEventListener('click', close);
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ const mb = document.getElementById('modalBackdrop'); if(mb && mb.style.display==='flex'){ mb.style.display='none'; document.body.style.overflow=''; } } });
+      })();
     })();
 
-    // accessibility: show focus outlines on Tab
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Tab') document.body.classList.add('user-tabbing'); });
-
-    console.log('HELALINK updated UI loaded — all ways-of-earning added, each in its own pad with distinct colors.');
+    // small @load animations
+    (function(){ const wa = document.getElementById('waChat'); if(wa) wa.style.opacity=0, setTimeout(()=> wa.style.opacity=1, 300); })();
   </script>
 </body>
 </html>
