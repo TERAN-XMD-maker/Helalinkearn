@@ -177,6 +177,228 @@
 
         <div class="absolute left-4 bottom-4 p-3 rounded-lg bg-white/3 text-sm font-semibold">Preparing for Liftoff • 13 Sep 2025 • 2:00 PM EAT</div>
       </div>
+<!-- Fullscreen Image Carousel Section -->
+<section class="full-image-carousel">
+  <!-- Slides -->
+  <div class="slide active">
+    <img src="https://i.postimg.cc/VLZsKyVj/download.jpg" alt="HELALINK Preview 1" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/YSWS4X8Q/download-1.jpg" alt="HELALINK Preview 2" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/4xMdxCvJ/download-2.jpg" alt="HELALINK Preview 3" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/Y23CmLND/images-3.jpg" alt="HELALINK Preview 4" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/6qY6sF5x/images-4.jpg" alt="HELALINK Preview 5" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/qqkB5prG/images-5.jpg" alt="HELALINK Preview 6" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/d1Rt6Lb1/images-6.jpg" alt="HELALINK Preview 7" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/YqCqN2br/images-7.jpg" alt="HELALINK Preview 8" />
+  </div>
+  <div class="slide">
+    <img src="https://i.postimg.cc/cHGLfQ52/images-8.jpg" alt="HELALINK Preview 9" />
+  </div>
+
+  <!-- Controls -->
+  <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a>
+
+  <!-- Navigation Dots -->
+  <div class="dots"></div>
+</section>
+
+<!-- Buttons Below Carousel -->
+<div class="carousel-buttons">
+  <a href="#earnings" class="btn-primary">Explore Earnings</a>
+  <a href="https://wa.me/1234567890" target="_blank" class="btn-secondary">Chat on WhatsApp</a>
+</div>
+
+<style>
+/* Carousel container */
+.full-image-carousel {
+  position: relative;
+  width: 100%;
+  height: 500px; /* banner height */
+  overflow: hidden;
+}
+
+.full-image-carousel .slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.full-image-carousel .slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.full-image-carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Controls */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.3s;
+  user-select: none;
+  z-index: 2;
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+.prev:hover, .next:hover { color: #ff416c; }
+
+/* Navigation dots */
+.dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.dots span {
+  height: 12px;
+  width: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dots span.active {
+  background: #ff416c;
+  transform: scale(1.2);
+}
+
+/* Buttons below carousel */
+.carousel-buttons {
+  text-align: center;
+  margin: 20px 0;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn-primary:hover { opacity: 0.85; }
+
+.btn-secondary {
+  background: #fff;
+  color: #333;
+  font-weight: bold;
+}
+
+.btn-secondary:hover { background: #f1f1f1; }
+</style>
+
+<script>
+// Carousel Logic
+let currentSlide = 0;
+const slides = document.querySelectorAll(".full-image-carousel .slide");
+const dotsContainer = document.querySelector(".dots");
+const totalSlides = slides.length;
+const intervalTime = 5000; // auto-slide every 5s
+let slideInterval;
+
+// Create dots dynamically
+slides.forEach((_, index) => {
+  const dot = document.createElement("span");
+  if (index === 0) dot.classList.add("active");
+  dot.addEventListener("click", () => {
+    currentSlide = index;
+    showSlide(currentSlide);
+    resetInterval();
+  });
+  dotsContainer.appendChild(dot);
+});
+
+const dots = document.querySelectorAll(".dots span");
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove("active");
+    if (i === index) slide.classList.add("active");
+  });
+  dots.forEach((dot, i) => {
+    dot.classList.remove("active");
+    if (i === index) dot.classList.add("active");
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  showSlide(currentSlide);
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  showSlide(currentSlide);
+}
+
+function startCarousel() {
+  slideInterval = setInterval(nextSlide, intervalTime);
+}
+
+function resetInterval() {
+  clearInterval(slideInterval);
+  startCarousel();
+}
+
+// Controls
+document.querySelector(".next").addEventListener("click", () => {
+  nextSlide();
+  resetInterval();
+});
+
+document.querySelector(".prev").addEventListener("click", () => {
+  prevSlide();
+  resetInterval();
+});
+
+// Init
+showSlide(currentSlide);
+startCarousel();
+</script>
+
     </section>
 
     <!-- Ways of earning -->
