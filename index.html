@@ -548,28 +548,58 @@ startCarousel();
         </aside>
       </div>
     </section>
+<!-- ================= WHAT TO DO NOW SECTION ================= -->
+<section class="todo-section">
+  <h2>🚀 What To Do Now</h2>
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-header">🔔 Step 1: Enable Notifications</button>
+      <div class="accordion-body">
+        <p>Click the notification bell and allow push notifications to stay updated with HELALINK news & offers.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-header">💬 Step 2: Join WhatsApp</button>
+      <div class="accordion-body">
+        <p>Press the WhatsApp button to connect directly with our support team & community group.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-header">🧑‍💻 Step 3: Explore Earning Methods</button>
+      <div class="accordion-body">
+        <p>Check out the earning options like affiliate program, watching videos, online games and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= WHY TRUST US SECTION ================= -->
 <section class="trust-section">
   <h2>💎 Why Trust Us?</h2>
-  <p class="trust-intro">
-    At <b>HELALINK Agencies</b>, we are committed to building a safe, transparent and empowering platform for everyone.  
-  </p>
-  <div class="trust-container">
-    <div class="trust-card">
-      <h3>🔒 Secure & Transparent</h3>
-      <p>Your safety is our top priority. All systems are encrypted and transactions are transparent.</p>
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-header">🔒 Secure & Transparent</button>
+      <div class="accordion-body">
+        <p>All systems are encrypted, your data is safe, and transactions are fully transparent.</p>
+      </div>
     </div>
-    <div class="trust-card">
-      <h3>🌍 Global Community</h3>
-      <p>We’re more than just a platform — we’re a family. Thousands of members are already growing with us.</p>
+    <div class="accordion-item">
+      <button class="accordion-header">🌍 Global Community</button>
+      <div class="accordion-body">
+        <p>Thousands of members worldwide are already growing with HELALINK Agencies.</p>
+      </div>
     </div>
-    <div class="trust-card">
-      <h3>📊 Real & Verified Results</h3>
-      <p>We provide proof of results and success stories, ensuring no false promises — only real growth.</p>
+    <div class="accordion-item">
+      <button class="accordion-header">📊 Real & Verified Results</button>
+      <div class="accordion-body">
+        <p>We provide proof of results and success stories — no fake promises, only real growth.</p>
+      </div>
     </div>
-    <div class="trust-card">
-      <h3>🤝 Dedicated Support</h3>
-      <p>Our team is available on WhatsApp and other channels to guide you step by step.</p>
+    <div class="accordion-item">
+      <button class="accordion-header">🤝 Dedicated Support</button>
+      <div class="accordion-body">
+        <p>Our support team is available on WhatsApp & other channels to help you step by step.</p>
+      </div>
     </div>
   </div>
 
@@ -607,6 +637,58 @@ startCarousel();
 </section>
 
 <style>
+/* General Section Styling */
+.todo-section, .trust-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.todo-section h2, .trust-section h2 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #222;
+}
+
+/* Accordion Styling */
+.accordion {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-header {
+  background: #fff;
+  width: 100%;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+  background: #f9f9f9;
+}
+
+.accordion-body {
+  display: none;
+  padding: 0 20px 15px 20px;
+  font-size: 0.95rem;
+  color: #444;
+  animation: fadeIn 0.4s ease;
+}
+
+.accordion-item.active .accordion-body {
+  display: block;
+}
+
 /* Testimonials */
 .testimonials {
   margin-top: 60px;
@@ -682,12 +764,27 @@ startCarousel();
 }
 
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(10px);}
+  from {opacity: 0; transform: translateY(-5px);}
   to {opacity: 1; transform: translateY(0);}
 }
 </style>
 
 <script>
+/* Accordion Logic */
+document.querySelectorAll(".accordion-header").forEach(button => {
+  button.addEventListener("click", () => {
+    const item = button.parentElement;
+    item.classList.toggle("active");
+
+    // Only one open at a time
+    document.querySelectorAll(".accordion-item").forEach(other => {
+      if (other !== item) {
+        other.classList.remove("active");
+      }
+    });
+  });
+});
+
 /* Testimonials Slider Logic */
 const testimonials = document.querySelectorAll(".testimonial");
 const prevBtn = document.querySelector(".testimonial-btn.prev");
@@ -716,6 +813,7 @@ setInterval(() => {
   showTestimonial(currentIndex);
 }, 5000);
 </script>
+
 
   </main>
 
